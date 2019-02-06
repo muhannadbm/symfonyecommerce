@@ -1,0 +1,16 @@
+
+
+
+
+{% block body %}
+    <h1>Add Photos to Gallery</h1>
+
+    {{ include('admin/image/_form.html.twig') }}
+
+    {% for image in imagelist %}
+
+        <img src="{{ asset('uploads') }}/images/{{ image.image }} " height="200" width="400" >
+        <a href="{{ path('admin_image_del',{'id':image.id ,'pid':image.productid}) }}" onclick="return confirm('are you sure you want to delete');">Delete</a>
+    {% endfor %}
+
+{% endblock %}

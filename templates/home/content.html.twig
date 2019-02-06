@@ -1,0 +1,89 @@
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon"
+          type="image/png"
+
+         href="https://cdn4.iconfinder.com/data/icons/natural-green-perfect-pixel-2/512/Leaves_leaf_green_natural-512.png"
+
+<div class="main" style="margin-top: -30px">
+
+    <div class="wrap">
+    <div class="content">
+        <div class="content_top">
+            <div class="heading">
+                <h3>Products On Sale</h3>
+            </div>
+            <div class="see">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+
+
+            <div class="wrap">
+
+            {% for rs in new %}
+                    <div class="grid_1_of_4 images_1_of_4" style="width: 200px">
+                        <img class="new" alt="" src="{{ asset('uploads') }}/images/sale.png">
+
+                        <a href=""><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}"  height="150"  width="400" style="margin-bottom: 10px"></a>
+                        <h2>{{ rs.title }}</h2>
+                        <div class="price-details">
+                            <div class="price-number">
+                                <p><span class="rupees">${{ rs.sellprice }}</span></p>
+                            </div>
+                            <div class="add-cart">
+                                <h4><a href="{{ path('product_details', {'id': rs.id}) }}">See More</a></h4>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    </div> </div>
+
+<div class="main">
+    <div class="wrap">
+    <div class="content">
+        <div class="content_top">
+            <div class="heading">
+                <h3>New Products</h3>
+            </div>
+            <div class="see">
+                <p><a href="{{ path('all_products') }}">See all Products</a></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            <div class="wrap">
+                {% for rs in slider %}
+            <div class="grid_1_of_4 images_1_of_4">
+                <img class="new" alt="" src="{{ asset('uploads') }}/images/new.png">
+
+                <a href=""><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}"  height="150"  width="400" style="margin-bottom: 10px"></a>
+                <h2>{{ rs.title }}</h2>
+                <div class="price-details">
+                    <div class="price-number">
+                        <p><span class="rupees">${{ rs.sellprice }}</span></p>
+                    </div>
+                    <div class="add-cart">
+                        <h4><a href="{{ path('product_details', {'id': rs.id}) }}">See More</a></h4>
+                    </div>
+                    <div class="clear"></div>
+
+            </div>
+
+
+
+        </div>
+                {% endfor %}
+
+        </div>
+    </div>
+    </div>

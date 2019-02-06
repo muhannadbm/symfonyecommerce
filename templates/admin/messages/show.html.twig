@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="shortcut icon" type="image/png" href="{{asset('admin')}}/assets/images/icon/favicon.ico">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/themify-icons.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/metisMenu.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/slicknav.min.css">
+        <!-- amchart css -->
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+        <!-- others css -->
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/typography.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/default-css.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/styles.css">
+        <link rel="stylesheet" href="{{asset('admin')}}/assets/css/responsive.css">
+    </head>
+    <body style="background-color: "></body>
+
+
+    {{ include ('admin/messages.html.twig') }}
+
+
+    <div class="login-form-head">
+        <h4>Message Id:{{ message.id }}</h4>
+
+    </div>
+    <div class="login-form-body">
+        <label for="exampleInputName1">Sender Name</label>
+        <div class="form-gp">
+
+            <input type="text" id="exampleInputName1" value="{{ message.name }} " readonly>
+            <i class="ti-user"></i>
+        </div>
+        <label for="exampleInputEmail1">Email address</label>
+        <div class="form-gp">
+
+            <input type="email" id="exampleInputEmail1" value="{{ message.email }} " readonly>
+            <i class="ti-email"></i>
+        </div>
+        <label for="exampleInputName1">Subject</label>
+        <div class="form-gp">
+
+            <input type="text" id="exampleInputName1" value=" {{ message.subject }}" readonly>
+            <i class="fa fa-gg"></i>
+        </div>
+        <label for="exampleInputPassword2">Status</label>
+        <div class="form-gp">
+
+            <input type="text" id="exampleInputPassword2" value="{{ message.status }}" readonly>
+            <i class="fa fa-chrome"></i>
+        </div>
+        <label for="exampleInputPassword2">Message:</label>
+        <div class="form-gp">
+
+            <textarea cols="25" rows="7" readonly>{{ message.message }} </textarea> </div>
+        <label for="exampleInputPassword2">Comment</label>
+        <div class="form-gp">
+            <form action="{{ path('admin_messages_update',{'id':message.id}) }}" method="post">
+            <textarea name="comment" cols="20" rows="4">{{ message.comment }} </textarea></div>
+        <div class="submit-btn-area">
+            <button id="form_submit" type="submit" style="background-color: #8655FC; color: white">Submit <i class="ti-arrow-right"></i></button>
+        </div>
+        </form>
+  <br>
+        {{ include('admin/messages/_delete_form.html.twig') }}
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

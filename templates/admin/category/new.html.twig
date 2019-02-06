@@ -1,0 +1,14 @@
+{% extends 'adminbase.html.twig' %}
+
+
+{% block title %}Category Add{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Add New Category</h4>{% endblock %}
+{% block path %}  <li><a href="{{ path('admin_category_index') }}">Category List </a></li> <li><a href=>Category Add </a></li> {% endblock %}
+{% block content %}
+
+
+
+    {{ include('admin/category/_form.html.twig') }}
+
+    <a href="{{ path('admin_category_index') }}">back to list</a>
+{% endblock %}

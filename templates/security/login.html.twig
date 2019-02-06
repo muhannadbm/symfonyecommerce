@@ -1,0 +1,102 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Login-{{data[0].title}} {% endblock %}
+
+
+{% block keywords %} login {{ data[0].keywords }}{% endblock %}
+{% block description %}login {{ data[0].description }} {% endblock %}
+
+   {% block content %}
+       <header>
+           <style>
+               a:hover {
+                   background-color: lightgray;
+               }
+           </style>
+       </header>
+       {{ include ('admin/messages.html.twig') }}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+    {{ include ('home/sidebar2.html.twig') }}
+
+        <h1 class="title text-center" style="color: #fe980f;  margin-left: 40px"  > Welcome: {{ app.user.name }}</h1>
+    <h2 class="title text-left" style="color: #fe980f;  margin-left: 40px"  > Email: {{ app.user.email }}</h2>
+       {% if is_granted('ROLE_ADMIN') %}
+    <h2 class="title text-left" style="color: #fe980f; margin-bottom: 100px; margin-left: 40px"  > Role: Admin</h2>
+           {% elseif is_granted('ROLE_USER')  %}
+               <h2 class="title text-left" style="color: #fe980f; margin-bottom: 100px; margin-left: 40px"  > Role: User</h2>
+       {% endif %}
+
+
+
+
+
+
+    {% else %}
+
+
+<section>
+            <div class="container" style="margin-top: 0px; margin-bottom: 100px" >
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <div class="login-form"><!--login form-->
+                            <h2>Login to your account</h2>
+                            <form method="post" name="login_form">
+
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+
+                                <label for="inputEmail" class="sr-only">Email</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" style="width: 400px" placeholder="Email" required autofocus>
+                                <label for="inputPassword" class="sr-only">Password</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" style="width: 400px" placeholder="Password" required>
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+
+                                {#
+                                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                                    See https://symfony.com/doc/current/security/remember_me.html
+
+                                    <div class="checkbox mb-3">
+                                        <label>
+                                            <input type="checkbox" name="_remember_me"> Remember me
+                                        </label>
+                                    </div>
+                                #}
+
+                                <button class="btn btn-default" type="submit">Login</button>
+                <p style="   color: #696763;
+                                font-family: 'Roboto', sans-serif;
+                                font-size: 20px;
+                                font-weight: 300;">Or if you dont have account</p>
+                                <a style="background-color: #FE980F; color: white" href="{{ path('new_user') }}" class="btn btn-default">Register </a>
+
+                            </form>
+
+                        </div> </div> </div> </div> </section>
+
+
+    {% endif %}
+
+
+   {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

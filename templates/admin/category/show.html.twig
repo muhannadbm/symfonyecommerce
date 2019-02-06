@@ -1,0 +1,56 @@
+{% extends 'adminbase.html.twig' %}
+
+
+{% block title %}Category Info{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">View Category Info</h4>{% endblock %}
+{% block path %}  <li><a href="{{ path('admin_category_index') }}">Category List </a></li> <li><a href=>Category Detail </a></li> {% endblock %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+    <h1 class="header-title">Category Detail</h1>
+<div class="single-table">
+    <div class="table-responsive">
+        <table class="table table-hover text-center">
+
+
+        <tbody>
+            <tr>
+                <th >ID</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ category.title }}</td>
+            </tr>
+            <tr>
+                <th>Parent Category</th>
+                {% if category.parentid!=0 %}
+                <td>{{ catname.title }}</td>
+                    {% else %}
+                        <td>None</td>
+
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ category.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ category.description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ category.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_category_index') }}">back to list</a>
+
+    <a href="{{ path('admin_category_edit', {'id': category.id,'pid': category.parentid}) }}">edit</a>
+
+    {{ include('admin/category/_delete_form.html.twig') }}
+    </div> </div>  </div> </div>
+{% endblock %}

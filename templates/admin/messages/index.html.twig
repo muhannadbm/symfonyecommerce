@@ -1,0 +1,61 @@
+
+
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Messages List{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Messages List</h4>{% endblock %}
+{% block path %}  <li><a href={{ path('admin_messages_index') }}>Messages List </a></li> {% endblock %}
+{% block content %}
+
+
+
+
+    <div class="card">
+    <div class="card-body">
+    <h4 class="header-title">Messages <br><br> </h4>
+
+    <div class="single-table">
+    <div class="table-responsive">
+    <table class="table table-hover text-center">
+
+        <thead class="text-uppercase bg-dark">
+
+        <tr class="text-white">
+
+        <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.message }}</td>
+                <td>{{ message.comment }}</td>
+                <td>{{ message.status }}</td>
+                <td>
+                    <a href="javascript:openWin('{{ path('admin_messages_show', {'id': message.id})}}','',' toolbar=no,location= no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=yes,resizable=no,width=1000,height=750')"> <i class="fa fa-eye"></i></a>
+                    {{ include('admin/messages/_delete_form.html.twig') }}
+                </td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no Records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

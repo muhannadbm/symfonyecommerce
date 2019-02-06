@@ -1,0 +1,174 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %} {{ data[0].title }}{% endblock %}
+
+{% block keywords %}  {{ data[0].keywords }} {% endblock %}
+{% block description %} {{ data[0].description }}{% endblock %}
+{% block sidebar %} {{ include ('home/sidebar.html.twig') }} {% endblock %}
+{% block content %}
+<div>
+
+
+
+<div class="wrap">
+
+
+        <div class="product-details"><!--product-details-->
+            <div class="col-sm-5" >
+                <div class="view-product" >
+
+
+
+                    <div class="carousel slide" id="similar-product" data-ride="carousel" >
+
+                        <!-- Wrapper for slides -->
+
+                        <div class="carousel-inner" >
+
+                            <div class="item active" >
+                                <a href=""><img alt="" src="{{ asset('uploads') }}/images/{{ data[0].image }}"  height="200px" width="200"></a>
+
+                            </div>
+
+                            {% for rs in image %}
+
+                                <div class="item">
+                                    <a href=""><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}" height="200px" width="200"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+
+
+                        <!-- Controls -->
+                        <a class="left item-control" href="#similar-product" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right item-control" href="#similar-product" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                    <h3>{{ data[0].title }}</h3>
+                </div>
+
+
+            </div>
+            <div class="col-sm-7">
+                <div class="product-information"><!--/product-information-->
+
+                    <h2>{{ data[0].title }}</h2>
+                    <p>Product ID:{{ data[0].id }}</p>
+                    <br>
+                    <p>Product Description: {{ data[0].description }}</p>
+
+<form name="shopcart" action="{{ path('shopcart_new') }}" method="post" >
+                    <span>
+									<span>US ${{ data[0].sellprice }}</span>
+									<label>Quantity:</label>
+									<input name="shopcart[quantity]" value="1" type="number" max="{{ data[0].amount }}" min="1">
+                        <input type="hidden" name="shopcart[productid]" value="{{ data[0].id }}" >
+                        <input type="hidden" name="token" value="{{ csrf_token('add-item') }}" >
+
+									<button class="btn btn-fefault cart" type="submit">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+								</span>
+</form>
+
+                    <p><b>Availability: </b> In Stock, Last {{ data[0].amount }} item</p>
+                    <p><b>Production date: </b> {{ data[0].year}}</p>
+                    <p><b>Type: </b>{{ data[0].type }}</p>
+
+                </div><!--/product-information-->
+            </div>
+        </div><!--/product-details-->
+
+        <div class="category-tab shop-details-tab"><!--category-tab-->
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="details">
+                    <div class="col-sm-3">
+
+
+                       {{ data[0].detail|raw }}
+                                </div> </div>
+                    </div>
+
+                <div class="tab-pane fade" id="companyprofile">
+
+                    <div class="col-sm-3">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img alt="" src="images/home/gallery4.jpg">
+                                    <h2>$56</h2>
+                                    <p>Easy Polo Black Edition</p>
+                                    <button class="btn btn-default add-to-cart" type="button"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="tab-pane fade" id="reviews">
+                    <div class="col-sm-12">
+                        <ul>
+                            <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+                            <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                            <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                        </ul>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+                    </div>
+                </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="../Eshopper/js/jquery.js"></script>
+    <script src="../Eshopper/js/price-range.js"></script>
+    <script src="../Eshopper/js/jquery.scrollUp.min.js"></script>
+    <script src="../Eshopper/js/bootstrap.min.js"></script>
+    <script src="../Eshopper/js/jquery.prettyPhoto.js"></script>
+    <script src="../Eshopper/js/main.js"></script>
+    <script src="../Eshopper/js/jquery.js"></script>
+    <script src="../Eshopper/js/bootstrap.min.js"></script>
+    <script src="../Eshopper/js/jquery.scrollUp.min.js"></script>
+    <script src="../Eshopper/js/price-range.js"></script>
+    <script src="../Eshopper/js/jquery.prettyPhoto.js"></script>
+    <script src="../Eshopper/js/main.js"></script>
+    </body>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

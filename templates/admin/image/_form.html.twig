@@ -1,0 +1,23 @@
+
+<div class="card mt-5">
+    <div class="card-body">
+
+        <form action ="{{ path('admin_image_new',{'pid':pid}) }}" method="post" enctype="multipart/form-data">
+
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input  name="productid" value="{{ pid }}" type ="hidden"  >
+                    <input type="file" name="imagename" id="fileToUpload" >
+
+                </div>
+                <div class="input-group-append">
+                    <input class="input-group-text" type="submit" value ="Upload Image" name ="submit">
+
+                </div>
+            </div>
+
+
+
+    </form>
+</div>
+</div>

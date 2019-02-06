@@ -1,0 +1,47 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %} Our Products {% endblock %}
+
+{% block keywords %}  all products {% endblock %}
+{% block description %} All Products{% endblock %}
+
+{% block content %}
+
+
+    <div class="wrap" style="margin-top: -60px">
+<div class="features_items"><!--features_items-->
+    <br>
+    <h2 class="title text-center">Our Products</h2>
+
+    {% for rs in all %}
+
+
+    <div class="col-sm-4">
+        <div class="product-image-wrapper">
+            <div class="single-products">
+                <div class="productinfo text-center">
+                    <img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}" height="200" >
+                    <h2>${{ rs.sellprice }}</h2>
+                    <p>{{ rs.title }}</p>
+                    <a class="btn btn-default add-to-cart" href="{{ path('product_details', {'id': rs.id} )}}"><i class="fa fa-info"></i>Product Detail</a>
+
+                </div>
+
+            </div> </div> </div>
+
+
+
+
+
+
+        {% endfor %}
+
+
+</div>
+
+    </div>
+
+    {{ include ('home/content.html.twig') }}
+
+ {% endblock %}
+

@@ -1,0 +1,77 @@
+
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Users info Edit{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Edit The Selected Users info</h4>{% endblock %}
+{% block path %}  <li><a href="{{ path('admin_user') }}">Users List </a></li> <li> <a href="">Edit Users info </a></li> {% endblock %}
+{% block content %}
+
+
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title" style="color: rebeccapurple">Enter Users New Info</h4>
+
+    <div class="col-12 mt-5">
+
+
+                <form method="post">
+
+    <div id="userss" class="col-6 mt-5">
+        <div class="form-group"><label for="userss_name" class="required"> <b class="text-muted mb-3 mt-4 d-block">Name:</b></label>
+            <input type="text"  class="form-control" id="user_name" name="user[name]" required="required" maxlength="50" value="{{ user.name }}">
+        </div><div class="form-group"><label for="userss_email" class="required"> <b class="text-muted mb-3 mt-4 d-block">Email:</b></label>
+            <input value="{{ user.email }}" type="email"  class="form-control" id="users_email" name="user[email]" required="required" maxlength="50"></div><div>
+            <label for="users_password" class="required">Password</label>
+            <input value="{{ user.password }}" type="password"  class="form-control" id="user_password" name="user[password]" required="required" maxlength="150"></div>
+        <div class="form-group"><label for="user_type" class="required"> <b class="text-muted mb-3 mt-4 d-block">Status:</b></label>
+            <input value="{{ user.status }}" type="text"  class="form-control" id="user_status" name="user[status]" required="required" maxlength="10"></div>
+
+
+
+
+            <div id="users" class="col-6 mt-5">
+                <div class="form-group"><label class="required"> <b class="text-muted mb-3 mt-4 d-block">Role:</b></label>
+                    <div class="form-group">
+
+                        <select size="1" name="user[roles]"  class="form-control" >
+                            {% for item in user.roles  %}
+                                <option selected>{{ item }}</option> {% endfor %}
+                                 <option>ROLE_ADMIN</option>
+                            <option value="ROLE_USER">ROLE_USER</option>
+                            <option  >ROLE_MEMBER</option>
+
+
+
+
+
+                        </select>
+
+                    </div>
+                    <input type="hidden"  class="form-control"  name="user[phone]" value="user[phone]">
+                    <input type="hidden"  class="form-control"  name="user[address]" value="user[address]">
+                    <input type="hidden"  class="form-control"  name="user[city]" value="user[city]">
+
+                </div> </div>
+
+
+
+
+
+        <button class="btn btn-primary mt-4 pr-4 pl-4" type="submit">Submit</button>
+
+
+
+        <input type="hidden"  class="form-control" id="userss__token" name="userss[_token]" value="_fuU1aIV4cpS-9Zp_-jSHGGlAvtFzaZAH4NNVy973vg"></div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

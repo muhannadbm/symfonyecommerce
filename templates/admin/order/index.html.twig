@@ -1,0 +1,83 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Orders List</h4>{% endblock %}
+{% block path %}  <li><a href=>Orders List </a></li> {% endblock %}
+{% block content %}
+
+    <body style="background-color: white">
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Orders List</h4>
+                <div class="single-table">
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <thead class="text-uppercase bg-dark">
+                            <tr class="text-white">
+
+                                <th>Name</th>
+                                <th>Amount</th>
+
+
+                                <th>City</th>
+                                <th>Phone</th>
+                                <th>Shipinfo</th>
+                                <th>Status</th>
+
+                                <th>Created_at</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.name }}</td>
+                                    <td>${{ order.amount }}</td>
+
+
+                                    <td>{{ order.city }}</td>
+                                    <td>{{ order.phone }}</td>
+                                    <td>{{ order.shipinfo }}</td>
+                                    <td>{{ order.status }}</td>
+
+
+                                    <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+
+                                    <td> <a href="javascript:openWin('{{ path('admin_order_show', {'id': order.id} )}}','',' toolbar=no,location= no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=yes,resizable=no,width=1000,height=750')">
+                                            show</a>
+                                      </td>
+
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="13">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

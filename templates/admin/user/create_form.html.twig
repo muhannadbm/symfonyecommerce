@@ -1,0 +1,70 @@
+
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Users Add{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Add New User</h4>{% endblock %}
+{% block path %}  <li><a href="{{ path('admin_user') }}">User List </a></li> <li><a href=>User Add </a></li> {% endblock %}
+{% block content %}
+
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="header-title" style="color: rebeccapurple">New Users Login Info</h4>
+
+    <div class="col-12 mt-5">
+
+
+                <form method="post">
+
+    <div id="users" class="col-6 mt-5">
+        <div class="form-group"><label for="users_name" class="required"> <b class="text-muted mb-3 mt-4 d-block">Name:</b></label>
+            <input type="text"  class="form-control" id="users_name" name="user[name]" required="required" maxlength="50">
+        </div><div class="form-group"><label for="users_email" class="required"> <b class="text-muted mb-3 mt-4 d-block">Email:</b></label>
+            <input type="email"  class="form-control" id="users_email" name="user[email]" required="required" maxlength="50"></div><div><label for="users_password" class="required"><b class="text-muted mb-3 mt-4 d-block">Password:</b></label>
+            <input type="password"  class="form-control" id="users_password" name="user[password]" required="required" maxlength="150"></div>
+        <div class="form-group"><label for="users_type" class="required"> <b class="text-muted mb-3 mt-4 d-block">Status:</b></label>
+            <input type="text"  class="form-control" id="users_status" name="user[status]" required="required" maxlength="10"></div>
+
+
+
+            <div id="users" class="col-6 mt-5">
+                <div class="form-group"><label class="required"> <b class="text-muted mb-3 mt-4 d-block">Role:</b></label>
+                    <div class="form-group">
+
+                        <select size="1" name="user[roles]"  class="form-control" >
+
+
+                            <option value="ROLE_ADMIN" >ROLE_ADMIN</option>
+                            <option value="ROLE_USER" >ROLE_USER</option>
+                            <option value="ROLE_MEMBER" >ROLE_MEMBER</option>
+
+
+
+
+
+                        </select>
+                    </div>
+
+
+                </div> </div>
+
+
+
+
+        <button class="btn btn-primary mt-4 pr-4 pl-4" type="submit">Submit</button>
+
+
+
+        <input type="hidden"  class="form-control" id="users__token" name="users[_token]" value="_fuU1aIV4cpS-9Zp_-jSHGGlAvtFzaZAH4NNVy973vg"></div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

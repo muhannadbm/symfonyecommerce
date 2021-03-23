@@ -1,0 +1,79 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Product{% endblock %}
+
+{% block page %}  <h4 class="page-title pull-left">New Product Add</h4>{% endblock %}
+{% block path %}  <li><a href="{{ path('admin_product_index') }}">Product List </a></li> <li><a href=>Product Add </a></li> {% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="header-title" >Add New Product</h4>
+
+        <div class="col-12 mt-5">
+
+
+                <div id="users" class="col-6 mt-5">
+    <form name="product" method="post">
+        <div id="product"><div><label for="product_title"><b class="text-muted mb-3 mt-4 d-block">Title</b></label>
+<input class="form-control" type="text" id="product_title" name="product[title]" maxlength="150"></div> 
+            <div><label for="product_keywords"><b class="text-muted mb-3 mt-4 d-block">Keywords</b></label>
+<input class="form-control" type="text" id="product_keywords" name="product[keywords]" maxlength="255"></div> 
+            <div><label for="product_description"><b class="text-muted mb-3 mt-4 d-block">Description</b></label>
+<input class="form-control" type="text" id="product_description" name="product[description]" maxlength="255"></div> 
+            <div><label for="product_type"><b class="text-muted mb-3 mt-4 d-block">Type</b></label>
+<input class="form-control" type="text" id="product_type" name="product[type]" maxlength="20"></div> 
+            
+            <div><label for="product_min"><b class="text-muted mb-3 mt-4 d-block">Min</b></label>
+<input class="form-control" type="number" id="product_min" name="product[min]"></div> 
+
+
+            
+            <div><label for="product_category_id"><b class="text-muted mb-3 mt-4 d-block">Category id</b></label>
+                <div class="form-group">
+
+                    <select size="1" name="product[category_id]"  class="form-control" >
+                           <option value="-1">None</option>
+                        {% for cat in catlist %}
+                            <option value="{{ cat.id }}"> {{ cat.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+           
+            <div>
+             
+                                <div class="form-group"><label class="required"> <b class="text-muted mb-3 mt-4 d-block">Status: (Must Be True for the product to start appearing on Homepage)</b></label>
+                                 
+                                     <select size="1" name="product[status]"  class="form-control"  >
+                                  
+                                    <option value ="True" >True</option>
+                                    <option value ="False">False</option> 
+                                    
+            
+                            </select>
+                            </div>
+            <div><label for="product_detail"><b class="text-muted mb-3 mt-4 d-block">Detail</b></label> <br>
+                <textarea id="detail" name="product[detail]"></textarea>
+                
+                
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#detail' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+
+                
+                </div>
+                
+                
+ 
+
+        <br>
+        <button class="btn btn-primary mt-4 pr-4 pl-4" class="btn">Save</button>
+    </form>
+<br>
+
+    <a href="{{ path('admin_product_index') }}">back to list</a>
+                </div> </div> </div> </div>
+{% endblock %}

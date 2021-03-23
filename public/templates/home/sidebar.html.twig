@@ -1,0 +1,181 @@
+<style>
+
+
+
+  
+    ol, ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .categories h3 {
+        font-size: 1.2em;
+        color: #fff;
+        padding: 10px;
+margin-bottom: 5px;              
+        text-transform: uppercase;
+        font-family: "ambleregular";
+    }
+    a {
+        text-decoration: none;
+    }
+    .categories li a {
+        display: block;
+        font-size: 1.4em;
+        padding: 8px 15px;
+        color: #9c9c9c;
+    
+        margin: 0 20px;
+      
+
+        text-transform: uppercase;
+    }
+    .categories li:last-child a {
+        border: none;
+    }
+
+
+
+
+    ul#menu-v, #menu-v ul
+    {
+        position: relative;
+        width:100%; /* Main Menu width */
+    
+        list-style:none; margin:0; padding:0;
+        z-index:9;
+    }
+
+    #menu-v li
+    {
+        margin:0;padding:0;
+        position:relative;
+        background: #383838;
+        transition:background 0.5s;
+    }
+    #menu-v li:hover
+    {
+        background-color:#FF8C00
+    }
+
+    #menu-v a
+    {
+        font:normal 13px Arial;
+        font-family: 'ambleregular';
+        border-top:1px solid rgba(190,190,190,0.3);
+        display:block;
+        color:#EEEEEE;
+        text-decoration:none;
+        line-height:30px;
+        padding-left:22px;
+        position:relative;
+    }
+
+    #menu-v li:first-child a
+    {
+        border-top:0;
+    }
+
+    #menu-v a.arrow::after{
+        content:'';
+        position:absolute;
+        display:inline;
+        top:50%;
+        margin-top:-4px;
+        right:8px;
+
+    }
+
+    #menu-v li a.arrow:hover::after
+    {
+        
+    }
+
+    /*Sub level menu items
+    ---------------------------------------*/
+
+
+    #menu-v li:hover > ul
+    {
+        display:block;
+    }
+
+        
+     {% if app.request.getLocale() == 'ar'%}
+     
+    #menu-v li ul
+    {
+        min-width:180px; /* Sub level menu min width */
+        position:absolute;
+        display:none;
+        right:100%;
+        top:0%; 
+    }
+
+#menu-v a {
+    font: normal 120% Arial; }
+    
+    .categories h3 {
+    font-size: 150%; }
+    
+    
+    .categories li a {
+
+    background: url(../images/drop_arrowright.png) no-repeat 0; 
+        background-position-x: 100%;
+    }
+    
+    
+    
+    
+    
+    {% else%}
+        #menu-v li ul
+    {
+        min-width:180px; /* Sub level menu min width */
+        position:absolute;
+        display:none;
+        left:100%;
+        top:0%;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    {% endif %}
+    
+    
+    
+    
+</style>
+<script>var elements = document.getElementsByTagName('li');
+for(var i = 0, len = elements.length; i < len; i++) {
+    elements[i].onclick = function () {
+        return true;
+        // stuff
+    }
+}</script>
+
+
+<div class="header_bottom_left" style="margin-top: 0px">
+    <div class="categories">
+        <ul id="menu-v">
+            <h3 style="background-color: darkorange">{% trans %}Categories{% endtrans %}</h3>
+           
+           
+
+{% for cat in cats %}
+            {{ cat|raw}} {% endfor %}
+            
+
+          
+        </ul>
+        
+        
+    </div>
+</div>
+</div>

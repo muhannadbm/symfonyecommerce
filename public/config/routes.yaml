@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_logout:
+  path: /logout
+mgilet_notification:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+
+  

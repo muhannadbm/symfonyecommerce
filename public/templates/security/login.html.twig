@@ -1,0 +1,86 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Login-{{data[0].title}} {% endblock %}
+
+
+{% block keywords %} login {{ data[0].keywords }}{% endblock %}
+{% block description %}login {{ data[0].description }} {% endblock %}
+
+   {% block content %}
+<style> label {
+    margin-bottom: 7px;
+    color: #fdb515;
+}</style>
+       {{ include ('admin/messages.html.twig') }}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+    {{ include ('home/sidebar2.html.twig') }}
+
+
+    {% else %}
+
+<div class="banner-top">
+	<div class="container">
+
+        			<h3>صفحة تسجيل الدخول</h3>
+		<h4><a href="index.html">الرئيسية</a><label>/</label>تسجيل الدخول</h4>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<!--login-->
+
+	<div class="login">
+	
+		<div class="main-agileits">
+				<div class="form-w3agile">
+						<h3 >تسجيل الدخول</h3>
+                        {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+					<form method="post" name="login_form">
+                         <label for="txtEmail">البريد الالكتروني</label>
+						<div class="key">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<input  type="text"  {% if last_username %} value="{{ last_username }}" {% else %}  {% endif %}name="email"  required="">
+							<div class="clearfix"></div>
+						</div>
+						  <label for="pssword">كلمة المرور</label>
+						<div class="key">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+							<input  type="password"  name="password"  required="">
+							<div class="clearfix"></div>
+						 </div> 
+                              <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}" >
+						<input type="submit" value="تسجيل الدخول">
+					</form>
+				</div>
+				<div class="forg">
+					{# <a href="#" class="forg-left">Forgot Password</a> #}
+					<a href="{{ path('new_user') }}" class="forg-right">إنشاء حساب</a>
+				<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+
+
+    {% endif %}
+
+
+   {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

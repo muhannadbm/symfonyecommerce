@@ -1,0 +1,49 @@
+
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Cities List{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Cities List</h4>{% endblock %}
+{% block path %}  <li><a href={{ path('city_index') }}>Cities List </a></li> {% endblock %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+ 
+
+        <a href="{{ path('addcity') }}"class="btn btn-outline-success mb-3" type="button">Add City</a>
+        <div class="single-table">
+            <div class="table-responsive">
+                <table class="table table-hover text-center">
+                    <thead class="text-uppercase bg-dark">
+
+                    <tr class="text-white">
+                    <th>Id</th>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for city in cities %}
+            <tr>
+                <td>{{ city.id }}</td>
+                <td>{{ city.name }}</td>
+
+                <td>
+                    <a href="{{ path('city_edit', {'id': city.id}) }}"><i class="fa fa-magic"></i></a>
+                
+                </td>
+                <td>    {{ include('admin/city/_delete_form.html.twig') }} </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">No Records Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

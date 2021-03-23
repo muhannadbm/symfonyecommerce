@@ -1,0 +1,118 @@
+
+
+<style> 
+.myclass{
+display: grid;
+justify-content: center;
+border-radius: 150px;
+font-size: large;
+background: lemonchiffon;
+border-left: solid #039445;
+border-top-left-radius: 0px;
+
+border-bottom-left-radius: 0px;
+}
+
+
+.list-group-item:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 150px;
+}
+a:hover, a:focus {
+    color: #039445;
+    text-decoration: none;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 150px;
+
+border-bottom-left-radius: 0px;
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+
+      .wrap{
+          width: 26%;margin: 0 auto;
+
+      }
+      .mynav{    width: 100%;
+    margin-left: 10%;
+    margin-top: 33px;
+}
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #FFF;
+    background-color: #fab005;
+}
+
+@media only screen 
+  and (min-device-width: 350px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+      .wrap{
+          width: 57%;margin: 0 auto;
+
+      }
+      .navbar-header{margin-top: 23px;}
+
+}
+
+</style>
+
+<nav class="navbar mynav navbar-default" dir="ltr">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="glyphicon glyphicon-user"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">{{ app.user.name }} مرحباً</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        {# <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li> #}
+        <li  {% if app.request.attributes.get('_route')=='userpanel_show' %}  class="active" {% else %} {% endif %}><a href="{{ path('userpanel') }}">  <span class="glyphicon glyphicon-info-sign"></span> المعلومات الشخصية</a></li>
+             <li {% if app.request.attributes.get('_route')=='userpanel_edit' %}  class="active" {% else %} {% endif %}><a href="{{ path('userpanel_edit') }}"><span class="glyphicon glyphicon-edit"></span> تعديل المعلومات الشخصية</a></li>
+                  <li {% if app.request.attributes.get('_route')=='shopcart_index' %}  class="active" {% else %} {% endif %}><a href="{{ path('shopcart_index') }}" ><span class="glyphicon glyphicon-shopping-cart"></span> سلة المشتريات </a> </li>
+                   {% if is_granted('ROLE_SELLER') %}
+                            <li {% if app.request.attributes.get('_route')=='orders_index' %}  class="active" {% else %} {% endif %}><a href="{{ path('orders_index') }}" ><span class="glyphicon glyphicon-list-alt"></span> المبيعات</a> </li>
+                            {% else %}
+                             <li {% if app.request.attributes.get('_route')=='orders_index' %}  class="active" {% else %} {% endif %}><a href="{{ path('orders_index') }}" ><span class="glyphicon glyphicon-list-alt"></span> المشتريات</a> </li>
+                            {% endif %}
+  {% if is_granted('ROLE_SELLER') %}
+   <li><a href="{{ path('product_index') }}"><span class="glyphicon glyphicon-gift"></span> إدارة المنتجات</a></li>
+  {% endif %}
+      {% if is_granted('ROLE_ADMIN') %}
+ <li><a href="{{ path('admin_user') }} " target="_blank" ><span class="glyphicon glyphicon-cog"></span> لوحة الأدمن</a> </li>
+{% endif %}
+                             <li><a href="{{ path('app_logout') }}"><span class="glyphicon glyphicon-log-out"></span> تسجيل الخروج</a></li>
+                          
+
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+    
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="wrap"> 
+	
+</div>
+
+ 

@@ -1,0 +1,15 @@
+
+
+ {% if is_granted('ROLE_SELLER') %}
+<form method="post" action="{{ path('orders_delete', {'id': product.orderid,'seller': product.getSeller().getId(),'user': product.userid,'product': product.productid }) }}" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب ؟');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('sellerdelete' ~ order.id) }}">
+    <button class="btn label-danger" style="color: white;">إلغاء الطلب</button>
+</form>
+{% else %}
+<form method="post" action="{{ path('orders_delete', {'id': product.orderid,'seller': product.getSeller().getId(),'user': product.userid,'product': product.productid }) }}" onsubmit="return confirm('هل أنت متأكد من إلغاء الطلب ؟');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+    <button class="btn label-danger" style="color: white;">إلغاء الطلب</button>
+</form>
+{% endif %}

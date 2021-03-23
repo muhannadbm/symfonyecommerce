@@ -1,0 +1,96 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Results{% endblock %}
+
+{% block keywords %} {% endblock %}
+{% block description %} {% endblock %}
+
+{% block content %} 
+<head profile="http://www.w3.org/2005/10/profile">
+    <link rel="icon"
+          type="image/png"
+
+         href="https://cdn4.iconfinder.com/data/icons/natural-green-perfect-pixel-2/512/Leaves_leaf_green_natural-512.png">
+         
+         
+         <style>
+
+
+
+.grid_1_of_4 images_1_of_4 img {
+  display: block;
+max-height: 270px;
+ max-width: 125px;
+  object-fit: scale-down;
+
+}
+
+
+
+
+
+.images_1_of_4 {
+    width: 30%;
+
+    text-align: center;
+    position: relative;
+    max-height: 270px;
+     
+ 
+}
+         </style>
+
+
+
+    </div> </div>
+
+<div class="main">
+    <div class="wrap">
+    <div class="content">
+
+        <div class="section group">
+            <div class="wrap">
+               {% for rs in result %}
+            <div class="grid_1_of_4 images_1_of_4" style="margin-bottom: 10px">
+                
+
+                <a href="{{ path('product_details', {'id': rs.id}) }}"><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}"  height="150"  width="350" style="margin-bottom: 5px"></a>
+                <h2>
+                       {% if app.request.getLocale() == 'ar'%}
+                    {{ rs.titlear }}
+                    
+                           {% elseif app.request.getLocale() == 'tr'%}
+                    {{ rs.titletr }}
+                         {% else %}
+                    {{ rs.title }}
+                    
+                    {% endif %}
+                    
+                    </h2>
+                <div class="price-details">
+           
+                    <div class="add-cart">
+                        <h4><a href="{{ path('product_details', {'id': rs.id}) }}">{% trans %}See More{% endtrans %}</a></h4>
+                    </div>
+                    <div class="clear"></div>
+
+            </div>
+
+
+
+        </div>
+                {% endfor %}
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+ {% endblock %}

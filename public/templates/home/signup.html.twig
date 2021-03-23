@@ -1,0 +1,288 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+
+   {% block content %}
+<style> 
+.forg-right {
+
+    float: inherit;
+    color: #369241;
+    margin-right: 7px;
+
+}
+
+label {
+    margin-bottom: 7px;
+    color: #fdb515;
+}</style>
+
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  {{ include ('admin/messages.html.twig') }}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+  {{ include ('home/sidebar2.html.twig') }}
+
+
+
+        <h1 class="title text-center" style="color: #fe980f;  margin-left: 40px"  > Welcome: {{ app.user.name }}</h1>
+    <h2 class="title text-left" style="color: #fe980f;  margin-left: 40px"  > Email: {{ app.user.email }}</h2>
+    <h2 class="title text-left" style="color: #fe980f;  margin-left: 40px"  > You are already registered and signed in.</h2>
+       {% if is_granted('ROLE_ADMIN') %}
+    <h2 class="title text-left" style="color: #fe980f; margin-bottom: 100px; margin-left: 40px"  > Role: Admin</h2>
+           {% elseif is_granted('ROLE_USER')  %}
+               <h2 class="title text-left" style="color: #fe980f; margin-bottom: 100px; margin-left: 40px"  > Role: User</h2>
+       {% endif %}
+
+
+
+
+
+
+    {% else %}
+
+<div class="banner-top">
+	<div class="container">
+		<h3 >صفحة التسجيل</h3>
+		<h4><a href="index.html">الرئيسية</a><label>/</label>التسجيل</h4>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+
+<!--login-->
+
+ 
+
+
+</div>
+	<div class="login" style="display: flex">
+		<div class="main-agileits">
+				<div class="form-w3agile form1">
+					<h3>التسجيل كمشتري</h3>
+					<form method="post" id="myform" name="user">
+                    <label for="txtEmail">البريد الالكتروني</label>
+                    <div class="key">
+                      
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<input type="text"  id="txtEmail" name="user[email]"  required maxlength="25">
+							<div class="clearfix"></div>
+						</div>
+                        <label for="fname">اسم المستخدم</label>
+						<div class="key">
+                         
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<input id="fname"    type="text" name="user[name]" required maxlength="15">
+							<div class="clearfix"></div>
+						</div>
+                         <label for="phone">رقم الهاتف</label>
+						<div class="key">
+                        
+							<i class="fa fa-phone" aria-hidden="true"></i>
+							<input  id="phone" type="text"   name="user[phone]"  required maxlength="15">
+							<div class="clearfix"></div>
+						</div>
+                          <label for="address">العنوان</label>
+                        	<div class="key">
+                           
+							<i class="fa fa-map-marker" aria-hidden="true"></i>
+							<input id="address" type="text"    name="user[address]"  required maxlength="60">
+							<div class="clearfix"></div>
+						</div>
+                        	
+                        
+                        <div class="input-group">
+                         <label for="city">المدينة</label>
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-building" aria-hidden="true"></i></span>
+      <select id="city" name="user[city]" style="height: 35px;" required>
+                            
+{% for city in cities %}
+                            <option value="{{city.name}}">{{city.name}}</option>
+                            {% endfor %}
+                        </select>
+</div>
+  <label for="pssword">كلمة المرور</label>
+						<div class="key">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+							<input id="password" type="password"  name="user[password]" required>
+							<div class="clearfix"></div>
+						</div>
+						{# <div class="key">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+        
+							<input id="inputEmail" type="password"  placeholder="Confirm Password" name="confirmpassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}" required="">
+							<div class="clearfix"></div>
+						</div> #}
+                           <input type="hidden" name="token"
+                           
+
+                                       value="{{ csrf_token('user-form') }}"
+                                >
+                               
+                         
+							<input id="btnValidate" type="submit" value="التسجيل" > <a href="{{ path('app_login') }}" class="forg-right">أو سجل الدخول</a>
+					</form>
+				</div>
+                <div class="forg">
+					{# <a href="#" class="forg-left">Forgot Password</a> #}
+				
+				<div class="clearfix"></div>
+				</div>
+				
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="main-agileits">
+				<div class="form-w3agile form1">
+					<h3>التسجيل كبائع</h3>
+					<form method="post" id="myform" name="user">
+                    <label for="txtEmail">البريد الالكتروني</label>
+                    <div class="key">
+                      
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<input type="text"  id="txtEmail" name="user[email]"  required maxlength="25">
+							<div class="clearfix"></div>
+						</div>
+                        <label for="fname">اسم المستخدم</label>
+						<div class="key">
+                         
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<input id="fname"    type="text" name="user[name]" required maxlength="15">
+							<div class="clearfix"></div>
+						</div>
+                         <label for="phone">رقم الهاتف</label>
+						<div class="key">
+                        
+							<i class="fa fa-phone" aria-hidden="true"></i>
+							<input  id="phone" type="text"   name="user[phone]"  required maxlength="15">
+							<div class="clearfix"></div>
+						</div>
+                          <label for="address">العنوان</label>
+                        	<div class="key">
+                           
+							<i class="fa fa-map-marker" aria-hidden="true"></i>
+							<input id="address" type="text"    name="user[address]"  required maxlength="60">
+							<div class="clearfix"></div>
+						</div>
+                        	
+                        
+                        <div class="input-group">
+                         <label for="city">المدينة</label>
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-building" aria-hidden="true"></i></span>
+      <select id="city" name="user[city]" style="height: 35px;" required>
+
+{% for city in cities %}
+                            <option value="{{city.name}}">{{city.name}}</option>
+                            {% endfor %}
+            
+                        </select>
+</div>
+  <label for="pssword">كلمة المرور</label>
+						<div class="key">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+							<input id="password" type="password"  name="user[password]" required>
+							<div class="clearfix"></div>
+						</div>
+						{# <div class="key">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+        
+							<input id="inputEmail" type="password"  placeholder="Confirm Password" name="confirmpassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}" required="">
+							<div class="clearfix"></div>
+						</div> #}
+                           <input type="hidden" name="token"
+                           
+
+                                       value="{{ csrf_token('seller-form') }}"
+                                >
+                               
+                         
+						<input id="btnValidate" type="submit" value="التسجيل" > 					<a href="{{ path('app_login') }}" class="forg-right">أو سجل الدخول</a>
+					</form>
+				</div>
+                <div class="forg">
+					{# <a href="#" class="forg-left">Forgot Password</a> #}
+
+				<div class="clearfix"></div>
+				</div>
+				
+			</div>
+		</div>
+
+
+<script> 
+
+
+$(document).ready(function(e) {
+$('#btnValidate').click(function() {
+var sEmail = $('#txtEmail').val();
+// Checking Empty Fields
+if ($.trim(sEmail).length == 0 || $("#fname").val()=="" || $("#phone").val()=="") 
+
+{
+alert('All fields are mandatory');
+e.preventDefault();
+}
+if (validateEmail(sEmail)) {
+alert('Nice!! your Email is valid, now you can continue..');
+}
+else {
+alert('Invalid Email Address');
+e.preventDefault();
+}
+});
+});
+// Function that validates email address through a regular expression.
+function validateEmail(sEmail) {
+var filter = /^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/;
+if (filter.test(sEmail)) {
+return true;
+}
+else {
+return false;
+}
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    {% endif %}
+
+
+   {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

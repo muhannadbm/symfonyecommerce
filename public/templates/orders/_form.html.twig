@@ -1,0 +1,148 @@
+
+{% block content %}
+<style> 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+
+    color: #fff;
+    background-color: green;
+    border-color: #285e8e;
+
+}
+.btn-primary {
+
+    color: #fff;
+    background-color: #039445;
+    border-color: #039445;
+
+}
+
+
+
+  @media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+  textarea{
+    width: 273px;
+  }
+
+}
+
+
+@media only screen 
+  and (min-device-width: 350px) 
+  and (max-device-width: 812px)  { 
+   .notes{
+  width: 44px;
+
+float: right;
+}
+
+      }
+
+
+</style>
+
+	 <div class="spec " style="margin-top: 104px;">
+				<h3>تقديم الطلب</h3>
+					<div class="ser-t">
+						<b></b>
+						<span><i style="margin-right: 9px;"></i></span>
+						<b class="line"></b>
+					</div>
+			</div>
+		
+<div class="wrap" dir="ltr">
+ <form name="order" action="{{ path('orders_new') }}" method="post">
+ <div class="input-group">
+<input  name="orders[name]" value="{{ app.user.name }}" type="text" class="form-control" placeholder="الإسم" aria-describedby="basic-addon1">
+  <span class="input-group-addon" id="basic-addon1">الإسم</span>
+</div>
+<div class="input-group">
+<input   value="{{ app.user.email }}" type="text" class="form-control" placeholder="البريد الإلكتروني" aria-describedby="basic-addon1">
+  <span class="input-group-addon" id="basic-addon1">البريد الإلكتروني</span>
+</div>
+<div class="input-group">
+<input  name="orders[phone]" value="{{ app.user.phone }}" type="text" class="form-control" placeholder="رقم الهاتف" aria-describedby="basic-addon1">
+  <span class="input-group-addon" id="basic-addon1">رقم الهاتف</span>
+</div>
+
+<div class="input-group">
+<input  name="orders[address]" value="{{ app.user.address }}" type="text" class="form-control" placeholder="العنوان" aria-describedby="basic-addon1">
+  <span class="input-group-addon" id="basic-addon1">العنوان</span>
+</div>
+
+<div class="input-group" style="width: 30px;float: right;">
+            <select style="height: 28px;" name="orders[city]">
+                                <option value="{{ app.user.city }}">{{ app.user.city }}</option>
+                                
+                            </select>
+<span class="input-group-addon" id="basic-addon1">الحي</span>
+</div>
+
+
+
+
+
+<input type="hidden" name="token" value="{{ csrf_token('form-order') }}">
+
+<div class="input-group notes">
+  <textarea name="orders[shipinfo]" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+  <span class="input-group-addon " id="basic-addon1">ملاحظات</span>
+</div>
+<div style="float: right; margin-bottom: 20px">
+<b style="float: right;"> :الإجمالي</b>
+                    
+                     <input  style="unicode-bidi:bidi-override !important;" readonly class="btn btn-primary" type="text" value="يدوعس لاير {{ total }}" >  
+                        </div > 
+                        <div style="text-align: center;">
+                        <button  class="btn btn-primary" type="submit"  href="">تقديم الطلب</button></div>
+  </form>
+  </div> 
+{# 
+
+<div class="shopper-informations">
+    <div class="row">
+
+        <div class="col-sm-5 clearfix">
+            <div class="bill-to">
+                <p>Bill To</p>
+                <div class="form-one">
+                    <form name="order" action="{{ path('orders_new') }}" method="post">
+
+                        <input type="text"  value="{{ app.user.email }}" placeholder="Email*">
+
+                        <input type="text" name="orders[name]" value="{{ app.user.name }}" placeholder="Full Name *">
+
+                        <input type="text" name="orders[address]" value="{{ app.user.address }}" placeholder="Address 1 ">
+                        <p>Total:</p><input readonly class="btn btn-primary" type="text" value="{{ total }} $" placeholder="Total">
+                        <button  class="btn btn-primary" type="submit" href="">Continue</button>
+
+<input type="hidden" name="token" value="{{ csrf_token('form-order') }}">
+
+
+                </div>
+                <div class="form-two">
+            
+
+<br> <br> <p>Phone number</p>
+                    <input type="text"  name="orders[phone]" value="{{ app.user.phone }}" placeholder="Phone *">
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="order-message">
+                <p>Shipping Order</p>
+                <textarea name="orders[shipinfo]" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+
+            </div>
+        </div>
+
+        </form>
+    </div>
+</div>
+</div> #}
+{% endblock %}

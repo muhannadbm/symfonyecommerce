@@ -1,0 +1,136 @@
+
+{% extends 'frontbase.html.twig' %}
+{% block title %}Shopcart{% endblock %}
+
+{% block content %}
+
+    {{ include ('admin/messages.html.twig') }}
+
+
+<style>
+.ring-in {
+
+    position: relative;
+    width: 25%;
+
+}
+
+a.at-in {
+
+    border: none;
+    padding: none;
+    margin-left: 11%;
+    display: contents;
+}
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+
+    max-height: 152.9px;
+    object-fit: scale-down;
+    margin: auto;
+}
+.t-head {text-align: center;}
+ </style>
+
+{{ include ('home/sidebar2.html.twig') }}
+ 
+
+	<!-- contact -->
+	
+		<div class="check-out">	 
+		<div class="container" style="margin-top: 50px;" dir="ltr">	 
+	 <div class="spec ">
+				<h3>سلة المشتريات</h3>
+					<div class="ser-t">
+						<b></b>
+						<span><i></i></span>
+						<b class="line"></b>
+					</div>
+			</div>
+		
+
+ 
+ 
+ 
+ <table class="table " style="border-bottom: none;border-left: none;">
+		  <tr>
+			<th class="t-head head-it ">المنتجات</th>
+            <th class="t-head">اسم المنتج</th>
+			<th class="t-head">السعر</th>
+		<th class="t-head">الكمية</th>
+        	<th class="t-head">الإجمالي</th>
+     {% set total=0 %}
+	     
+
+			{# <th class="t-head">Purchase</th> #}
+		  </tr>
+          
+            {% for shopcart in shopcarts %}
+		  <tr class="cross">
+			<td class="ring-in t-data">
+				<a href="single.html" class="at-in">
+					<img src="{{ asset('uploads') }}/images/{{ shopcart.image }}" class="img-responsive" alt="">
+				</a>
+			{# <div class="sed">
+				
+			</div> #}
+				<div class="clearfix"> </div>
+               
+				    {{ include('shopcart/_delete_form.html.twig') }}
+			 </td>
+             <td  class="t-data"class="t-data"> <h5>{{ shopcart.title }}</h5> </td>
+			<td class="t-data" dir="rtl">{{ shopcart.sellprice }} ريال سعودي</td>
+			<td class="t-data"><div class="quantity"> 
+								<div class="quantity-select">            
+								
+										<div class="entry value"><span class="span-1">{{ shopcart.quantity }}</span></div>									
+									
+								</div>
+							</div>
+			
+			</td>
+
+			<td class="t-data" dir="rtl">{{ shopcart.quantity * shopcart.sellprice}} ريال سعودي</td>
+			
+		  </tr>
+	                {% set total=total + (shopcart.quantity*shopcart.sellprice) %}
+					{% set sellers= [shopcart.seller] %}
+
+
+
+            {% else %}
+
+                <tr>
+                    <td colspan="5"><h4 style="justify-content: center;display: flex;">!سلة المشتريات فارغة</h4></td>
+                </tr>
+
+            {% endfor %}
+                        <tr><td></td><td class="t-data">		 {% if shopcarts %} <h2 class="t-button">
+				
+				<a style="justify-content: center;display: flex;" href="{{ path('orders_new') }}"><span class="label label-success">تقديم الطلب</span></a>
+			
+			  </h2> {% else %}  {% endif %}</td>  <td colspan="2" class="t-data">{{ shopcount }} :المنتجات في السلة</td><td  class="t-data"><h5 dir="rtl">الإجمالي: {{ total }} ريال سعودي</h5></td> </tr>
+            
+
+           
+	</table>
+		 </div>
+		 </div>
+		 				
+	<!--quantity-->
+			<script>
+			$('.value-plus').on('click', function(){
+				var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+				divUpd.text(newVal);
+			});
+
+			$('.value-minus').on('click', function(){
+				var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+				if(newVal>=1) divUpd.text(newVal);
+			});
+			</script>
+			<!--quantity-->
+			
+
+
+{% endblock %}
+

@@ -1,0 +1,170 @@
+{% extends 'frontbase.html.twig' %}
+{% block title %}Info Edit{% endblock %}
+{% block content %}
+    {{ include ('home/sidebar2.html.twig') }}
+    <div class="wrap"> 
+	
+
+<h3 class="bars" style="text-align: center;margin-top: 116px;">تعديل المعلومات</h3>
+   <form name="user" method="post" dir ="ltr">
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">	<i class="fa fa-envelope" aria-hidden="true"></i></span>
+  <input  type="email" class="form-control" value="{{ user.email }}"  placeholder="البريد الالكتروني" disabled aria-describedby="basic-addon1">
+
+</div>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-user" aria-hidden="true"></i></span>
+  <input  type="text" class="form-control" value="{{ user.name }}"  placeholder="اسم المستخدم" disabled aria-describedby="basic-addon1">
+</div>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-phone" aria-hidden="true"></i></span>
+  <input  type="text" class="form-control"  name="phone" value="{{ user.phone }}" placeholder="رقم الهاتف*" required aria-describedby="basic-addon1">
+</div>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-map-marker" aria-hidden="true"></i></span>
+  <input  type="text" class="form-control" name="address" value="{{ user.address }}" placeholder="العنوان *" required aria-describedby="basic-addon1">
+</div>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">		<i class="fa fa-building" aria-hidden="true"></i></span>
+      <select name="city" style="height: 35px;">
+       {% if user.city %}
+        <option value="{{ user.city }}">{{ user.city }}</option>
+       
+       {% else %} 
+       <option value="">المدينة</option>
+        {% endif %}
+                            <option value="{{ user.city }}">{{ user.city }}</option>
+                            <option value="Adana">Adana</option>
+                            <option value="Adıyaman">Adıyaman</option>
+                            <option value="Afyonkarahisar">Afyonkarahisar</option>
+                            <option value="Ağrı">Ağrı</option>
+                            <option value="Amasya">Amasya</option>
+                            <option value="Ankara">Ankara</option>
+                            <option value="Antalya">Antalya</option>
+                            <option value="Artvin">Artvin</option>
+                            <option value="Aydın">Aydın</option>
+                            <option value="Balıkesir">Balıkesir</option>
+                            <option value="Bilecik">Bilecik</option>
+                            <option value="Bingöl">Bingöl</option>
+                            <option value="Bitlis">Bitlis</option>
+                            <option value="Bolu">Bolu</option>
+                            <option value="Burdur">Burdur</option>
+                            <option value="Bursa">Bursa</option>
+                            <option value="Çanakkale">Çanakkale</option>
+                            <option value="Çankırı">Çankırı</option>
+                            <option value="Çorum">Çorum</option>
+                            <option value="Denizli">Denizli</option>
+                            <option value="Diyarbakır">Diyarbakır</option>
+                            <option value="Edirne">Edirne</option>
+                            <option value="Elazığ">Elazığ</option>
+                            <option value="Erzincan">Erzincan</option>
+                            <option value="Erzurum">Erzurum</option>
+                            <option value="Eskişehir">Eskişehir</option>
+                            <option value="Gaziantep">Gaziantep</option>
+                            <option value="Giresun">Giresun</option>
+                            <option value="Gümüşhane">Gümüşhane</option>
+                            <option value="Hakkâri">Hakkâri</option>
+                            <option value="Hatay">Hatay</option>
+                            <option value="Isparta">Isparta</option>
+                            <option value="Mersin">Mersin</option>
+                            <option value="İstanbul">İstanbul</option>
+                            <option value="İzmir">İzmir</option>
+                            <option value="Kars">Kars</option>
+                            <option value="Kastamonu">Kastamonu</option>
+                            <option value="Kayseri">Kayseri</option>
+                            <option value="Kırklareli">Kırklareli</option>
+                            <option value="Kırşehir">Kırşehir</option>
+                            <option value="Kocaeli">Kocaeli</option>
+                            <option value="Konya">Konya</option>
+                            <option value="Kütahya">Kütahya</option>
+                            <option value="Malatya">Malatya</option>
+                            <option value="Manisa">Manisa</option>
+                            <option value="Kahramanmaraş">Kahramanmaraş</option>
+                            <option value="Mardin">Mardin</option>
+                            <option value="Muğla">Muğla</option>
+                            <option value="Muş">Muş</option>
+                            <option value="Nevşehir">Nevşehir</option>
+                            <option value="Niğde">Niğde</option>
+                            <option value="Ordu">Ordu</option>
+                            <option value="Rize">Rize</option>
+                            <option value="Sakarya">Sakarya</option>
+                            <option value="Samsun">Samsun</option>
+                            <option value="Siirt">Siirt</option>
+                            <option value="Sinop">Sinop</option>
+                            <option value="Sivas">Sivas</option>
+                            <option value="Tekirdağ">Tekirdağ</option>
+                            <option value="Tokat">Tokat</option>
+                            <option value="Trabzon">Trabzon</option>
+                            <option value="Tunceli">Tunceli</option>
+                            <option value="Şanlıurfa">Şanlıurfa</option>
+                            <option value="Uşak">Uşak</option>
+                            <option value="Van">Van</option>
+                            <option value="Yozgat">Yozgat</option>
+                            <option value="Zonguldak">Zonguldak</option>
+                            <option value="Aksaray">Aksaray</option>
+                            <option value="Bayburt">Bayburt</option>
+                            <option value="Karaman">Karaman</option>
+                            <option value="Kırıkkale">Kırıkkale</option>
+                            <option value="Batman">Batman</option>
+                            <option value="Şırnak">Şırnak</option>
+                            <option value="Bartın">Bartın</option>
+                            <option value="Ardahan">Ardahan</option>
+                            <option value="Iğdır">Iğdır</option>
+                            <option value="Yalova">Yalova</option>
+                            <option value="Karabük">Karabük</option>
+                            <option value="Kilis">Kilis</option>
+                            <option value="Osmaniye">Osmaniye</option>
+                            <option value="Düzce">Düzce</option>
+                        </select>
+</div>
+
+                        <input type="hidden" name="token" value="{{ csrf_token('user-form') }}">
+                        <div class="input-group">
+                        <button style="margin-bottom: 35px" class="btn btn-warning" type="submit" href="">تعديل المعلومات</button>
+</div>
+       </form> </div>
+
+
+                 
+
+
+                        {# <P>Role:</P>
+                        <input type="text"  name="role" value="{{ user.roles|join }}" disabled placeholder="Role *"> #}
+
+
+
+
+
+
+
+              
+                   
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

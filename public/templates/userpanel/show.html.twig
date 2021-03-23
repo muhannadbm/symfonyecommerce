@@ -1,0 +1,130 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}User Info{% endblock %}
+
+{% block content %}
+   
+
+<style>
+
+.table > tbody > tr > td {border-top: solid 1px black  !important;}
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+
+  .table{width: 22% !important;}
+}
+
+
+@media only screen 
+  and (min-device-width: 350px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .table{width: 67% !important;}
+
+}
+</style>
+
+
+
+
+
+
+
+
+    {{ include ('home/sidebar2.html.twig') }}
+
+  <h3 class="bars" style="text-align: center;margin-top: 116px;"> الملف الشخصي </h3> 
+ <table class="table table-hover" style="margin: auto;margin-bottom: 30px;" dir="ltr">
+             <thead>
+                <tr style="background-color: #fab005;">
+                <th> </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    
+                  <td>{{ app.user.email }}</td> <th> :البريد الالكتروني</th> </tr>
+                  <tr>
+                  
+                  <td>{{ app.user.name }}</td>  <th> :اسم المستخدم</th></tr>
+                  <tr>
+                    
+                   <td>{{ app.user.phone }}</td> <th> :رقم الهاتف</th></tr>
+                   <tr>
+                   
+                   <td>{{ app.user.city }}</td> <th> :المدينة</th> </tr>
+                   <tr>
+                    
+
+                  <td>{{ app.user.address }}</td> <th> :العنوان</th></tr>
+                  <tr>
+                  
+              <td>{{ app.user.createdAt ? app.user.createdAt|date('Y-m-d H:i:s') : '' }}</td> <th> :عضو منذ</th> </tr>
+                 
+                </tr>
+               
+              </tbody>
+            </table>
+
+
+{# 
+<section id="cart_items" style="" ><div class="container" style="float: right;  ">
+
+
+        <div class="table-responsive cart_info col-3" style="width: 50%;" >
+            <table class="table table-condensed" >
+
+
+        <tbody>
+            <tr >
+                <th class="cart_menu" >Id</th>
+                <td>{{ app.user.id }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Email</th>
+                <td>{{ app.user.email }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Roles</th>
+                <td>{{ app.user.roles|join }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Name</th>
+                <td>{{ app.user.name }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Address</th>
+                <td>{{ app.user.address }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">City</th>
+                <td>{{ app.user.city }}</td>
+            </tr>
+
+            <tr>
+                <th class="cart_menu">Phone No</th>
+                <td>{{ app.user.phone }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Status</th>
+                <td>{{ app.user.status }}</td>
+            </tr>
+
+            <tr>
+                <th class="cart_menu">Updated_at</th>
+                <td>{{ app.user.updatedAt ? app.user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="cart_menu">Created_at</th>
+                <td>{{ app.user.createdAt ? app.user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+            </table>
+
+            </div> </div> </section>
+
+ #}
+{% endblock %}

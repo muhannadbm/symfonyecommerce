@@ -1,0 +1,462 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %} {{ data[0].title }}{% endblock %}
+
+{% block keywords %}  {{ data[0].keywords }} {% endblock %}
+{% block description %} {{ data[0].description }}{% endblock %}
+{% block sidebar %} {{ include ('home/sidebar.html.twig') }} {% endblock %}
+{% block content %}
+<div>
+    <head >
+        <link rel="icon"
+              type="image/png"
+
+              href="https://cdn4.iconfinder.com/data/icons/natural-green-perfect-pixel-2/512/Leaves_leaf_green_natural-512.png">
+
+</head>
+
+<style>
+    
+           .prod{ 
+          display: block;
+ max-height: 345.6px;
+ max-width: 240px;
+ min-height:275px ;
+ min-width:200px ;
+ 
+ object-fit: scale-down;
+ 
+}
+
+
+td,tr,table,tbody
+{ border:1px solid;}
+    
+</style>
+
+  <div class="wrap">
+    
+
+
+        <div class="product-details"><!--product-details-->
+            <div class="col-sm-5" >
+                <div class="view-product" >
+
+
+
+                    <div class="carousel slide" id="similar-product" data-ride="carousel" >
+
+                        <!-- Wrapper for slides -->
+
+                        <div class="carousel-inner" >
+
+                            <div class="item active" >
+                                <a href=""> <img class="prod" alt="" src="{{ asset('uploads') }}/images/{{ data[0].image }}"  height="200px" width="200"></a>
+
+                            </div>
+
+                            {% for rs in image %}
+
+                                <div class="item">
+                                    <a href=""><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}" height="200px" width="200"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+
+
+                        <!-- Controls -->
+                        
+                    </div>
+                    
+                    
+                    
+                    <h3>
+                        
+                           {% if app.request.getLocale() == 'tr'%} {{ data[0].titletr }}
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].titlear }}
+ 
+ {% else %}
+ 
+ {{ data[0].title }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </h3>
+                </div>
+
+
+            </div>
+            <div class="col-sm-7">
+                <div class="product-information"><!--/product-information-->
+
+                    <h2>
+                         {% if app.request.getLocale() == 'tr'%} {{ data[0].titletr }}
+                         {% elseif app.request.getLocale() == 'ar'%}
+                        {{ data[0].titlear }}
+ 
+ {% else %}
+ 
+ {{ data[0].title }}
+                                      {% endif %}
+                        
+                        </h2>
+                    <p><b>{% trans %}Product ID:{% endtrans %}</b> {{ data[0].id }}</p>
+                    <br>
+                    <p><b>{% trans %}Product Description:{% endtrans %}</b>
+                    
+                    
+                                               {% if app.request.getLocale() == 'tr'%} {{ data[0].descriptiontr }}
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].descriptionar }}
+ 
+ {% else %}
+ 
+    {{ data[0].description }}
+
+                      {% endif %}
+                    
+                    
+                    
+                </p>
+
+
+
+
+
+                    <p><b>{% trans %}Type:{% endtrans %}</b>
+                    
+                                                               {% if app.request.getLocale() == 'tr'%}{{ data[0].typetr }}
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].typear }}
+ 
+ {% else %}
+ 
+    {{ data[0].type }}
+
+                      {% endif %}
+                    
+                    
+                    
+                    
+                    
+                    </p>
+                    
+                    
+                       {% if data[0].type == "list" or data[0].type == "product with brochur" %} 
+                                    <br>
+                                                {% if app.request.getLocale() == 'ar'%} 
+                       <a class="btn btn-default add-to-cart" style="background-color: #FE980F; color: white; margin-bottom: 5px;"  href="{{ asset('uploads') }}/{{data[0].titlear}}.pdf" download >{% trans  %}Download PDF File{% endtrans %} <i class="fa fa-file-pdf-o"></i> </a>
+                    <p> <b>{% trans  %}Or{% endtrans %}</b></p> 
+                     <a style="background-color: #FE980F; color: white" class="btn btn-default add-to-cart" href="{{ asset('uploads') }}/{{data[0].titlear}}.pdf" target="_blank" >{% trans  %}View Brouchure{% endtrans %} <i class="fa fa-file-pdf-o"></i> </a>
+                         {% else %}
+                    <a class="btn btn-default add-to-cart" style="background-color: #FE980F; color: white; margin-bottom: 5px;"  href="{{ asset('uploads') }}/{{data[0].title}}.pdf" download >{% trans  %}Download PDF File{% endtrans %} <i class="fa fa-file-pdf-o"></i> </a>
+                    <p> <b> {% trans  %}Or{% endtrans %}</b></p> 
+                     <a style="background-color: #FE980F; color: white" class="btn btn-default add-to-cart" href="{{ asset('uploads') }}/{{data[0].title}}.pdf" target="_blank" >{% trans  %}View Brouchure{% endtrans %} <i class="fa fa-file-pdf-o"></i> </a>
+                      {% endif%}
+                
+                       {% endif%}
+                       
+                    
+                
+
+                </div><!--/product-information-->
+            </div>
+        </div><!--/product-details-->
+        
+        
+        
+        
+ 
+
+{% if data[0].detail|raw =="" or data[0].detail|raw ==" " or data[0].detail|raw ==NULL or data[0].detail == "<p>&nbsp;</p>"  %} 
+
+ {% else %}
+
+
+        <div class="category-tab shop-details-tab"><!--category-tab-->
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                          {% if data[0].detail|raw =="" or data[0].detail|raw ==" " or data[0].detail|raw ==NULL or data[0].detail == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li class="active"><a href="#details" data-toggle="tab">{% trans %}Details{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].Ingr|raw =="" or data[0].Ingr|raw ==" " or data[0].Ingr|raw ==NULL or data[0].Ingr == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#ingredients" data-toggle="tab">{% trans %}Ingredients{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].nutrit|raw =="" or data[0].nutrit|raw ==" " or data[0].nutrit|raw ==NULL or data[0].nutrit == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#nutr" data-toggle="tab">{% trans %}Nutritional composition{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].prep|raw =="" or data[0].prep|raw ==" " or data[0].prep|raw ==NULL or data[0].prep == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#prep" data-toggle="tab">{% trans %}Preparation{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].usag|raw =="" or data[0].usag|raw ==" " or data[0].usag|raw ==NULL or data[0].usag == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#usage" data-toggle="tab">{% trans %}Usage Instruction{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].importa|raw =="" or data[0].importa|raw ==" " or data[0].importa|raw ==NULL or data[0].importa == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#important" data-toggle="tab">{% trans %}Important Information{% endtrans %}</a></li> {% endif %}
+                    
+                                            {% if data[0].pack|raw =="" or data[0].pack|raw ==" " or data[0].pack|raw ==NULL or data[0].pack == "<p>&nbsp;</p>"  %} 
+                          {% else %} 
+                    <li ><a href="#pack" data-toggle="tab">{% trans %}Packaging and storage{% endtrans %}</a></li> {% endif %}
+
+                </ul>
+            </div>
+            
+            
+       
+                
+                
+                
+            
+            
+            
+            
+            
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="details">
+                    <div class="col-sm-9">
+ {% if app.request.getLocale() == 'tr'%} {{  data[0].detailtr|raw   }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+ {{  data[0].detailar|raw   }}
+ 
+ {% else %}
+ 
+{{  data[0].detail|raw   }}
+
+                      {% endif %}
+                             
+                                </div> </div>
+                   
+
+                <div class="tab-pane fade" id="ingredients">
+
+                    <div class="col-sm-9">
+                        
+                         {% if app.request.getLocale() == 'tr'%} {{ data[0].Ingrtr|raw }}
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].Ingrar|raw }}
+ 
+ {% else %}
+ 
+ {{ data[0].Ingr|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+
+
+                    </div>
+                </div>
+                                <div class="tab-pane fade" id="nutr">
+
+                    <div class="col-sm-9">
+                 
+                        
+                                                 {% if app.request.getLocale() == 'tr'%} {{ data[0].nutrittr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+ {{ data[0].nutritar|raw }}
+ 
+ {% else %}
+ 
+{{ data[0].nutrit|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                 
+                        
+
+                    </div>
+                </div>
+                
+                
+                            <div class="tab-pane fade" id="prep">
+
+                    <div class="col-sm-9">
+                        
+                        
+                                                 {% if app.request.getLocale() == 'tr'%} {{ data[0].preptr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].prepar|raw }}
+ 
+ {% else %}
+ 
+{{ data[0].prep|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </div>
+                </div>
+                
+                
+                
+                
+                            <div class="tab-pane fade" id="usage">
+
+                    <div class="col-sm-9">
+                        
+         
+                        
+                                                 {% if app.request.getLocale() == 'tr'%} {{ data[0].usagtr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+ {{ data[0].usagar|raw }}
+ 
+ {% else %}
+ 
+ {{ data[0].usag|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+  
+                        
+                        
+                        
+
+                    </div>
+                </div>
+                
+                
+                
+                            <div class="tab-pane fade" id="important">
+
+                    <div class="col-sm-9">
+                        
+                        
+                        
+                                                 {% if app.request.getLocale() == 'tr'%} {{ data[0].importatr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+{{ data[0].importaar|raw }}
+ 
+ {% else %}
+ 
+ {{ data[0].importa|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </div>
+                </div>
+                
+                
+                
+                            <div class="tab-pane fade" id="pack">
+
+                    <div class="col-sm-9">
+                        
+                        
+                        
+                        
+                        
+                                                 {% if app.request.getLocale() == 'tr'%} {{ data[0].packtr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+ {{ data[0].packar|raw }}
+ 
+ {% else %}
+ 
+{{ data[0].pack|raw }}
+
+                      {% endif %}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                 </div>
+
+
+
+
+
+        </div>
+
+
+
+{% endif %}
+
+
+
+ </div>
+ </div>
+
+
+
+    <script src="../Eshopper/js/jquery.js"></script>
+    <script src="../Eshopper/js/price-range.js"></script>
+    <script src="../Eshopper/js/jquery.scrollUp.min.js"></script>
+    <script src="../Eshopper/js/bootstrap.min.js"></script>
+    <script src="../Eshopper/js/jquery.prettyPhoto.js"></script>
+    <script src="../Eshopper/js/main.js"></script>
+    <script src="../Eshopper/js/jquery.js"></script>
+    <script src="../Eshopper/js/bootstrap.min.js"></script>
+    <script src="../Eshopper/js/jquery.scrollUp.min.js"></script>
+    <script src="../Eshopper/js/price-range.js"></script>
+    <script src="../Eshopper/js/jquery.prettyPhoto.js"></script>
+    <script src="../Eshopper/js/main.js"></script>
+    </body>
+{% endblock %}

@@ -1,0 +1,405 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Product Edit{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">Product Info Edit</h4>{% endblock %}
+{% block path %}  <li><a href=>Product Edit </a></li> {% endblock %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+    <div class="card">
+        <div class="card-body">
+
+            {{ include ('admin/messages.html.twig') }}
+            <h4 class="header-title" >Edit Selected Product info</h4>
+
+            <div class="col-12 mt-5">
+
+
+                <form method="post"   >
+
+                    <div id="users" class="col-6 mt-5">
+
+                        <div class="form-group">
+
+                            <select size="1" name="product[category_id]"  class="form-control"  >
+
+                                    <option value ="{{ product.categoryid }}" >{{ catname[0].title }}</option>
+                                    <option value="-1">None</option>
+                                {% for cat in catlist %}
+                                    {% if cat.title!=catname[0].title %}
+                                    <option value ="{{ cat.id }}"> {{ cat.title }}</option> {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                            <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Title:</b></label>
+                                <input  value="{{ product.title }}" type="text"  class="form-control" id="product_title" name="product[title]"  maxlength="40"  >
+                                
+                                            <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Title ِArabic:</b></label>
+                                <input  value="{{ product.titlear }}" type="text"  class="form-control" id="product_title" name="product[titlear]"  maxlength="40">
+                                
+                                            <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Title Turkish:</b></label>
+                                <input  value="{{ product.titletr }}" type="text"  class="form-control" id="product_title" name="product[titletr]"  maxlength="40" >
+
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Keywords:</b></label>
+                                    <input  value="{{ product.keywords }}" type="text"  class="form-control" id="category_keywords" name="product[keywords]" maxlength="250" >
+                                </div>
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Description:</b></label>
+                                    <input  value="{{ product.description }}" type="text"  class="form-control" id="product_desc" name="product[description]"  maxlength="250" >
+                                </div>
+                                
+                                                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Description Arabic:</b></label>
+                                    <input  value="{{ product.descriptionar }}" type="text"  class="form-control" id="product_desc" name="product[descriptionar]"  maxlength="250" >
+                                </div>
+                                
+                                                                                      <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Description Turkish:</b></label>
+                                    <input  value="{{ product.descriptiontr }}" type="text"  class="form-control" id="product_desc" name="product[descriptiontr]"  maxlength="250"  >
+                                </div>
+                                
+                                
+                                
+                                
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Status: (Must Be True for the product to start appearing on Homepage)</b></label>
+                                 
+                                     <select size="1" name="product[status]"  class="form-control"  >
+                                    <option value ="{{product.status}}" >{{product.status}}</option>
+                                  {% if product.status!="True" %}
+                                    <option value ="True" >True</option>
+{% else %}
+                                    <option value ="False">False</option> 
+                                {% endif%}
+                            </select>
+                                    
+                                    
+                                    
+                            
+                                    
+                                    
+                                </div>
+                                
+                                
+                                
+                                
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Type(product with brochur substring for brouchur):</b></label>
+                                    <input  value="{{ product.type }}" type="text"  class="form-control" id="product_type" name="product[type]"  maxlength="50" >
+                                </div>
+                                
+                                                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Type Arabic:</b></label>
+                                    <input  value="{{ product.typear }}" type="text"  class="form-control" id="product_type" name="product[typear]"  maxlength="50" >
+                                </div>
+                                
+                                                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Type Turkish:</b></label>
+                                    <input  value="{{ product.typetr }}" type="text"  class="form-control" id="product_type" name="product[typetr]"  maxlength="50" >
+                                </div>
+                                
+                                
+
+                            <!--    <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Price:</b></label>
+                                    <input  value="" type="text"  class="form-control" id="product_type" name="product[price]"  maxlength="20">
+                                </div>
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Sellprice:</b></label>
+                                    <input  value="" type="text"  class="form-control" id="product_type" name="product[sellprice]"  maxlength="20">
+                                </div> --> 
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Product in Sidebar? (1 for Yes any value for No):</b></label>
+                                    <input  value="{{ product.min }}" type="text"  class="form-control" id="product_type" name="product[min]"  maxlength="20">
+                                </div>
+
+
+  
+
+                                <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Image File Name:</b></label>
+                                    <input  value="{{ product.image }}" type="text"  class="form-control" id="product_type" name="product[image]" readonly  maxlength="250">
+                                </div>
+
+
+
+                                <label for="product_detail"><b class="text-muted mb-3 mt-4 d-block">Detail</b></label> <br>
+                                    <textarea id="detail" name="product[detail]" cols="200" rows="30" >{{ product.detail }}</textarea>
+                                    
+                                    
+                                          <label for="product_detail"><b class="text-muted mb-3 mt-4 d-block">Detail Turkish</b></label> <br>
+                                    <textarea id="detailtr" name="product[detailtr]" cols="200" rows="30" >{{ product.detailtr }}</textarea>
+                                    
+                                    
+                                          <label for="product_detail"><b class="text-muted mb-3 mt-4 d-block">Detail Arabic</b></label> <br>
+                                    <textarea id="detailar" name="product[detailar]" cols="200" rows="30" >{{ product.detailar }}</textarea>
+                                    
+                                         <label for="product_Ingredient"><b class="text-muted mb-3 mt-4 d-block">Ingredients</b></label> <br>
+                                    <textarea id="Ingr" name="product[Ingr]" cols="200" rows="30" >{{ product.Ingr }}</textarea>
+                                    
+                                    
+                                    <label for="product_Ingredient"><b class="text-muted mb-3 mt-4 d-block">Ingredients Turkish</b></label> <br>
+                                    <textarea id="Ingrtr" name="product[Ingrtr]" cols="200" rows="30" >{{ product.Ingrtr }}</textarea>
+                                    
+                                    
+                                    <label for="product_Ingredient"><b class="text-muted mb-3 mt-4 d-block">Ingredients Arabic</b></label> <br>
+                                    <textarea id="Ingrar" name="product[Ingrar]" cols="200" rows="30" >{{ product.Ingrar }}</textarea>
+                                    
+                                    
+                                             <label for="product_nutr"><b class="text-muted mb-3 mt-4 d-block">Nutritional composition</b></label> <br>
+                                    <textarea id="nutrit" name="product[nutrit]" cols="200" rows="30" >{{ product.nutrit }}</textarea>
+                                    
+                                    
+                                               <label for="product_nutr"><b class="text-muted mb-3 mt-4 d-block">Nutritional composition Turkish</b></label> <br>
+                                    <textarea id="nutrittr" name="product[nutrittr]" cols="200" rows="30" >{{ product.nutrittr }}</textarea>
+                                    
+                                    
+                                               <label for="product_nutr"><b class="text-muted mb-3 mt-4 d-block">Nutritional composition Arabic</b></label> <br>
+                                    <textarea id="nutritar" name="product[nutritar]" cols="200" rows="30" >{{ product.nutritar }}</textarea>
+                                    
+                                    
+                                             <label for="product_prep"><b class="text-muted mb-3 mt-4 d-block">Preperation</b></label> <br>
+                                    <textarea id="prep" name="product[prep]" cols="200" rows="30" >{{ product.prep }}</textarea>
+                                    
+                                    
+                                                    <label for="product_preptr"><b class="text-muted mb-3 mt-4 d-block">Preperation Turkish</b></label> <br>
+                                    <textarea id="preptr" name="product[preptr]" cols="200" rows="30" >{{ product.preptr }}</textarea>
+                                    
+                                                    <label for="product_prep"><b class="text-muted mb-3 mt-4 d-block">Preperation Arabic</b></label> <br>
+                                    <textarea id="prepar" name="product[prepar]" cols="200" rows="30" >{{ product.prepar }}</textarea>
+                                    
+                                    
+                                    
+                                             <label for="product_usage"><b class="text-muted mb-3 mt-4 d-block">Usage Info</b></label> <br>
+                                    <textarea id="usag" name="product[usag]" cols="200" rows="30" >{{ product.usag }}</textarea>
+                                    
+                                    
+                                                                              <label for="product_usage"><b class="text-muted mb-3 mt-4 d-block">Usage Info Turkish</b></label> <br>
+                                    <textarea id="usagtr" name="product[usagtr]" cols="200" rows="30" >{{ product.usagtr }}</textarea>
+                                    
+                                    
+                                                                              <label for="product_usage"><b class="text-muted mb-3 mt-4 d-block">Usage Info Arabic</b></label> <br>
+                                    <textarea id="usagar" name="product[usagar]" cols="200" rows="30" >{{ product.usagar }}</textarea>
+                                    
+                                             <label for="product_important"><b class="text-muted mb-3 mt-4 d-block">Important Info</b></label> <br>
+                                    <textarea id="importa" name="product[importa]" cols="200" rows="30" >{{ product.importa }}</textarea>
+                                    
+                                                                                <label for="product_important"><b class="text-muted mb-3 mt-4 d-block">Important Info Turkish</b></label> <br>
+                                    <textarea id="importatr" name="product[importatr]" cols="200" rows="30" >{{ product.importatr }}</textarea>
+                                    
+                                                                                <label for="product_important"><b class="text-muted mb-3 mt-4 d-block">Important Info Arabic</b></label> <br>
+                                    <textarea id="importaar" name="product[importaar]" cols="200" rows="30" >{{ product.importaar }}</textarea>
+                                    
+                                    
+                                    
+                                             <label for="product_pack"><b class="text-muted mb-3 mt-4 d-block">Packaging and Storage</b></label> <br>
+                                    <textarea id="pack" name="product[pack]" cols="200" rows="30" >{{ product.pack }}</textarea>
+                                    
+                                                                                 <label for="product_pack"><b class="text-muted mb-3 mt-4 d-block">Packaging and Storage Turkish</b></label> <br>
+                                    <textarea id="packtr" name="product[packtr]" cols="200" rows="30" >{{ product.packtr }}</textarea>
+                                    
+                                    
+                                                                                 <label for="product_pack"><b class="text-muted mb-3 mt-4 d-block">Packaging and Storage Arabic</b></label> <br>
+                                    <textarea id="packar" name="product[packar]" cols="200" rows="30" >{{ product.packar }}</textarea>
+                                    
+                                    
+                                    
+                                    
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#detail' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                                                    
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#detailar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                                                    
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#detailtr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                     <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#Ingr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#Ingrar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#Ingrtr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#nutrit' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#nutrittr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#nutritar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#prep' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#preptr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#prepar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#usag' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#usagtr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#usagar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#importa' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#importatr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#importaar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#pack' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#packtr' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                
+                                 <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#packar' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+
+
+
+
+                                <button class="btn btn-primary mt-4 pr-4 pl-4" type="submit">Update</button>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <a href="{{ path('admin_product_index') }}">back to list</a>
+    <br>
+    <br>
+
+{% endblock %}

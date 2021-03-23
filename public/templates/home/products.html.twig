@@ -1,0 +1,164 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %} {{ data[0].title }}{% endblock %}
+
+{% block keywords %}  {{ data[0].keywords }} {% endblock %}
+{% block description %} {{ data[0].description }}{% endblock %}
+{% block content %}
+<style> 
+
+
+.offer-img img {
+
+    margin: 0 auto;
+    width: 55%;
+    max-height: 150px;
+    object-fit: scale-down;
+    min-height: 150px;
+
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+
+    max-height: 273px;
+    object-fit: scale-down;
+    margin: auto;
+}
+
+</style>
+			<div class="container" style="margin-top: 23px;">
+			<div class="spec ">
+				<h3>{{data[0].title}}</h3>
+				<div class="ser-t">
+					<b></b>
+					<span><i></i></span>
+					<b class="line"></b>
+				</div>
+			</div>
+
+<p style="margin-bottom: 40px;">أنت تتصفح الأن البائعين في
+      <select id="dynamic_select" onchange="location = this.value;">
+	  {% for city in cities %}
+        <option {% if city.id == app.request.get('city')  %} selected {% endif %} value="{{ path('category_products', {'city': city.id ,'catid': data[0].id }) }}">{{city.name}}</option>
+    {% endfor %}
+      </select>
+</p>
+ 
+
+				<div class=" con-w3l"> 
+				{% for rs in new %}
+
+
+						<div class="col-md-3 pro-1 ">
+								<div class="col-m ">
+								<a href="#" data-toggle="modal" data-target="#myModal{{ loop.index }}" class="offer-img">
+										<img src="{{ asset('uploads') }}/images/{{ rs.image }}" class="img-responsive" alt=""  height="150"  width="350">
+									</a>
+									<div class="mid-1">
+										<div class="women">
+											<h4 style="text-align: center;"><a href="#" data-toggle="modal" data-target="#myModal{{ loop.index }}">{{ rs.title }} </a></h4>	
+											<h6 class="mymargin"><span class="mycolor">البائع:</span> {{ rs.getSeller().getName() }}</h6>
+																<h6 class="mymargin"><span class="mycolor">الحي:</span> {{ rs.city }}</h6>
+																<h6 class="mymargin"><span class="mycolor">الكمية المتاحة:</span> {{ rs.amount }}</h6>
+										<h6 style="margin-bottom: 20px" class="mymargin"><span class="mycolor">السعر:</span> 	{{ rs.sellprice }} ريال سعودي</h6>
+										</div>
+											{% if not is_granted('ROLE_SELLER') %}
+										{% if rs.amount == 0 %} <p style="color: red">السلعة غير متوفرة</p> {% else %}
+											<div class="add add-2">
+											<form class="form-inline " action="{{ path('shopcart_new')}}" method="post">
+									<div style="justify-content: center;display: inline-flex;" class="input-group"> 
+															<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" type="button" class="inc myquant label label-success">+</button> 
+  
+  <input class="form-control quantity" style="width: 30%;margin-top: 0px;margin-right: 7px;margin-left: 7px;text-align: center;" min="1" max="{{rs.amount}}" name="shopcart[quantity]" value="1" type="number" readonly >
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="dec myquant label label-danger">-</button>
+  </div>
+
+									
+								
+									 <input name="shopcart[seller]" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{ rs.getSeller().getId() }}" >
+    <input name="shopcart[productid]" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{rs.id}}" required >
+    <input name="token" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{csrf_token('add-item')}}" >
+
+       <button class="btn btn-danger my-cart-btn my-cart-b" type="submit">إضافة للسلة</button> {% endif %}
+    </form>
+				
+										   {# <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/of16.png">Add to Cart</button> #}
+										</div> {% endif %}
+									</div>
+								</div>
+							</div>
+
+
+
+ <!-- product -->
+			<div class="modal fade" id="myModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content modal-info">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+						</div>
+							<form class="form-inline " action="{{ path('shopcart_new')}}" method="post">
+						<div class="modal-body modal-spa">
+								<div class="col-md-5 span-2">
+											<div class="item">
+												<img src="{{ asset('uploads') }}/images/{{ rs.image }}" class="img-responsive" alt="">
+											</div>
+								</div>
+								<div class="col-md-7 span-1 ">
+									<h3>{{ rs.title }}</h3>
+									<p class="in-para" style="color: black"><span class="mycolor">اسم البائع:</span> {{ rs.getSeller().getName() }}</p>
+									<p class="in-para" style="color: black"><span class="mycolor">رقم التواصل:</span> {{ rs.getSeller().getPhone() }}</p>
+									<p class="in-para" style="color: black"><span class="mycolor">الكمية المتاحة:</span>  {{rs.amount}}</p>
+									
+									<div class="price_single">
+									  {# <span class="reducedfrom "><del>$2.00</del>$1.50</span> #}
+									   <span class="reducedfrom ">{{ rs.sellprice }} ريال سعودي</span>
+									
+									 <div class="clearfix"></div>
+									</div>
+									{% if not is_granted('ROLE_SELLER') %}
+										{% if rs.amount == 0 %} <p style="color: red">السلعة غير متوفرة</p> {% else %}
+									
+									<div style="justify-content: center;display: inline-flex;" class="input-group"> 
+									
+								<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" type="button" class="inc myquant label label-success">+</button> 
+  
+  <input class="form-control quantity" style="width: 30%;margin-top: 0px;margin-right: 7px;margin-left: 7px;text-align: center;" min="1" max="{{rs.amount}}" name="shopcart[quantity]" value="1" type="number" readonly >
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" type="button" class="dec myquant label label-danger">-</button>
+  </div>
+	{% endif %}		{% endif %}		
+									
+								
+									 
+    <input name="shopcart[productid]" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{rs.id}}" required >
+    <input name="token" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{csrf_token('add-item')}}" >
+	 <input name="shopcart[seller]" class="form-control form-control-sm mr-3 w-75" type="hidden" value="{{ rs.getSeller().getId() }}" >
+								<br>	<h6 class="quick">عن المنتج:</h6>
+									<p class="quick_desc">{{rs.detail}}</p>
+										{% if rs.amount == 0 %}  {% else %}
+										{% if not is_granted('ROLE_SELLER') %}
+									 <div class="add-to">
+										   <button class="btn btn-danger my-cart-btn my-cart-btn1 " type="submit" >إضافة إلى السلة</button>
+										</div>    {% endif %} {% endif %} </form>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- product -->
+
+
+{% else %}
+<h3 style="margin-bottom: 50px">لم تتم إضافة منتجات من هذا الصنف في منطقتك بعد, يرجى تغيير الصنف أو الحي.</h3>
+
+              {% endfor %}
+							<div class="clearfix"></div>
+
+							{{ knp_pagination_render(new) }}
+							</div>
+</div>
+
+
+
+ {% endblock %}

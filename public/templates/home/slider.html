@@ -1,0 +1,161 @@
+<style>
+     {% if app.request.getLocale() == 'ar'%}
+     
+ img:not(.logo):not(.sliderimg):not(.prod):not(.cert) {
+    display: inline-block; }
+    
+    
+    
+
+
+.carousel-inner > .item {
+
+    text-align: center; }
+ 
+     {% endif %}
+</style>
+
+
+<body>
+<section id="slider" style="margin-top: 55px" ><!--slider-->
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="carousel slide" id="slider-carousel" data-ride="carousel" style="height: 400px;">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0"></li>
+                        <li class="active" data-target="#slider-carousel" data-slide-to="1"></li>
+                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        <li data-target="#slider-carousel" data-slide-to="3"></li>
+                        <li data-target="#slider-carousel" data-slide-to="4"></li>
+                        <li data-target="#slider-carousel" data-slide-to="5"></li>
+                        <li data-target="#slider-carousel" data-slide-to="6"></li>
+                        <li data-target="#slider-carousel" data-slide-to="7"></li>
+                        <li data-target="#slider-carousel" data-slide-to="8"></li>
+                        <li data-target="#slider-carousel" data-slide-to="9"></li>
+                        <li data-target="#slider-carousel" data-slide-to="10"></li>
+                        <li data-target="#slider-carousel" data-slide-to="11"></li>
+                    </ol>
+
+                    <div class="carousel-inner" style="height: 400px">
+
+                        {% for rs in slider %}
+
+                            <div class="item" style="height: 300px">
+                                <div class="col-sm-6 " style="height: 300px">
+                                    <h1 style="margin-top: 5px"><span>
+                                          {% trans %}Latest{% endtrans %}
+                                        
+                                        </span><br> {% trans %}Products{% endtrans %}</h1>
+                                        
+                                        {% if app.request.getLocale() == 'tr'%} <h2>{{ rs.titletr }}</h2>
+ {% elseif app.request.getLocale() == 'ar'%}
+ <h2>{{ rs.titlear }}</h2>
+ 
+ {% else %}
+ 
+     <h2>{{ rs.title }}</h2>
+
+                      {% endif %}
+                                   
+                                    <p>
+                                        
+                                                                                {% if app.request.getLocale() == 'tr'%} {{ rs.descriptiontr }}
+ {% elseif app.request.getLocale() == 'ar'%}
+ {{ rs.descriptionar }}
+ 
+ {% else %}
+ 
+    {{ rs.description }}
+
+                      {% endif %}
+                                        
+                                        
+                                        
+                                         </p> 
+                                  
+                                    <a href="{{ path('product_details', {'id': rs.id}) }}">  <button class="btn btn-default get" type="button">
+                                        {% trans %} See Detail now{% endtrans %}
+                                        
+                                       </button>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-6" style="height: 300px">
+                                    <a href="{{ path('product_details', {'id': rs.id}) }}">  <img class="girl img-responsive" alt="" src={{ asset('uploads') }}/images/{{ rs.image }}> </a>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="item active" style="height:">
+                            <div class="col-sm-6" style="position: relative">
+                                        <h1 style="margin-top: 5px"><span>
+                                          {% trans %}Latest{% endtrans %}
+                                        
+                                        </span><br> {% trans %}Products{% endtrans %}</h1>
+                                        
+                                        
+                                                                                              {% if app.request.getLocale() == 'tr'%} <h2>         {{ slider1[0].titletr }}</h2></h2>
+ {% elseif app.request.getLocale() == 'ar'%}
+ <h2>         {{ slider1[0].titlear }}</h2>
+ 
+ {% else %}
+ 
+     <h2>         {{ slider1[0].title }}</h2>
+
+                      {% endif %}
+                                    
+                                    
+                                    
+                           
+                                    
+                                    
+                                    
+                               
+                                <p>
+                                    
+                                    {% if app.request.getLocale() == 'tr'%}   {{ slider1[0].descriptiontr }}
+ {% elseif app.request.getLocale() == 'ar'%}
+   {{ slider1[0].descriptionar }}
+ 
+ {% else %}
+ 
+    {{ slider1[0].description }}
+
+                      {% endif %}
+                                    
+                                    
+                                   </p>
+                              
+                                <a href="{{ path('product_details', {'id': slider1[0].id}) }}">  <button class="btn btn-default get" type="button"> {% trans %} See Detail now{% endtrans %}</button>
+                                </a>
+
+                            </div>
+                            <div class="col-sm-6" style="height: 300px">
+                                <a href="{{ path('product_details', {'id': slider1[0].id}) }}">  <img class="girl img-responsive" alt="" src={{ asset('uploads') }}/images/{{ slider1[0].image }}> </a>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <a class="left control-carousel hidden-xs" href="#slider-carousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="right control-carousel hidden-xs" href="#slider-carousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../../public/js/jquery.js"></script>
+<script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../public/js/jquery.scrollUp.min.js"></script>
+<script src="../../public/js/price-range.js"></script>
+<script src="../../public/js/jquery.prettyPhoto.js"></script>
+<script src="../../public/js/main.js"></script>
+</body>

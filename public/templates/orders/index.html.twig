@@ -1,0 +1,89 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Orders index{% endblock %}
+
+{% block content %}
+
+ 
+
+
+
+    {{ include ('home/sidebar2.html.twig') }}
+
+
+
+
+
+
+
+ {{ include ('admin/messages.html.twig') }}
+	 <div class="spec " style="margin-top: 110px;">
+				<h3>تاريخ الطلبات</h3>
+					<div class="ser-t">
+						<b></b>
+						<span><i></i></span>
+						<b class="line"></b>
+					</div>
+			</div>
+<div class="container">
+   <table class="table table-striped" dir="ltr">
+              <thead>
+                <tr>
+
+ 
+                <th>إظهار</th>
+<th>تاريخ الإنشاء</th>
+                         
+                         <th>رقم الهاتف</th>
+                      <th>الحي</th>
+                       {# <th>الإجمالي</th> #}
+                     <th>اسم الزبون</th>
+                     <th>رقم الطلب</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if orders != NULL %}
+                 {% for order in orders|sort|reverse %}   
+                <tr>
+               
+            
+
+
+
+
+                <td>
+                    <a href="{{ path('orders_show', {'id': order.id}) }}">إظهار التفاصيل</a></td>
+                    
+                <td>{{ order.created_At ? order.created_At|date('Y-m-d H:i:s') : '' }}</td>
+                    
+            
+                    
+                
+                <td>{{ order.phone }}</td>
+
+                    <td>{{ order.city }}</td>
+                        {# <td style="unicode-bidi:bidi-override !important;" >  <span>يدوعس لاير</span>  <span > {{ order.amount }} </span></td> #}
+                     <td>{{ order.name }}</td>
+                      <td>{{ order.id }}</td>
+                </tr>
+             
+                   {% else %}
+            <tr>
+                <td colspan="13" style="text-align: center;font-size: medium;">لا يوجد طلبات بعد</td>
+            </tr>
+        {% endfor %}
+{% else %}
+ <tr>
+                <td colspan="13" style="text-align: center;font-size: medium;">لا يوجد طلبات بعد</td>
+            </tr>
+          {% endif %}
+              </tbody>
+            </table>
+
+</div>
+
+                </body>
+    
+
+
+{% endblock %}

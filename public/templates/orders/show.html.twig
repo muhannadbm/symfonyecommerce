@@ -1,0 +1,193 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}Order Data{% endblock %}
+
+{% block content %}
+
+
+    {{ include ('home/sidebar2.html.twig') }}
+	<!-- contact -->
+		<div class="check-out">	 
+		<div class="container" style="margin-top: 50px;" dir="ltr">	 
+	 <div class="spec " >
+				<h3>تفاصيل الطلب</h3>
+					<div class="ser-t">
+						<b></b>
+						<span><i></i></span>
+						<b class="line"></b>
+					</div>
+			</div>
+		
+
+ 
+ 
+ <a href="{{ path('orders_index') }}" style="float: right;margin-bottom: 11px;color: white;border-radius: 690px;padding: 14px;" class="label-success">عودة إلى قائمة الطلبات</a>
+<table class="table " style="border-bottom: none;border-left: none;" dir="rtl">
+		  <tr>
+
+            <th class="t-head">اسم البائع</th>
+              <th class="t-head">رقم هاتف البائع</th>
+            <th class="t-head">اسم المنتج</th>
+			<th class="t-head">السعر</th>
+		<th class="t-head">الكمية</th>
+       <th class="t-head">الحالة</th>
+      		<th class="t-head">المجموع</th>
+			   {% if is_granted('ROLE_SELLER') %}
+			 <th class="t-head">تأكيد الطلب</th>
+			 {% endif %}
+			  <th class="t-head">إلغاء الطلب</th>
+
+			{# <th class="t-head">Purchase</th> #}
+		  </tr>
+          
+               {% set total=0 %}
+                {% for product in orderdetail %}
+		  <tr class="cross">
+	    	<td class="t-data">{{ product.getSeller().getName() }}</td>
+            <td class="t-data">{{ product.getSeller().getPhone() }}</td>
+             <td  class="t-data"> <h5>{{ product.name }}</h5> </td>
+			<td class="t-data" dir="rtl">{{ product.price }} ريال سعودي</td>
+			<td class="t-data"><div class="quantity">
+										<div class="entry value"><span class="span-1">{{ product.quantity }}</span></div>									
+							
+								</div>
+							</div>
+			
+			</td> 
+                 <td  class="t-data "> <h5  {% if product.status =="تم الإلغاء" %} class="btn label-danger" {% elseif product.status =="تم التأكيد" %} class="btn label-success" {% else %} class="btn label-info" {% endif %} style="color: white">{{ product.status }}</h5> </td>
+                      <td  class="t-data"> <h5>{{ product.amount }} ريال سعودي</h5> </td>
+ {% if is_granted('ROLE_SELLER') %}
+  {% if product.status =="تم الإلغاء" or product.status =="تم التأكيد" %}  {% else %}
+					   <td  class="t-data" style="text-align: center;" colspan="1" class="t-data"> 
+					   <form method="post" action="{{ path('orders_confirm', {'id': product.orderid,'seller': product.getSeller().getId(),'user': product.userid,'product': product.productid }) }}" onsubmit="return confirm('هل أنت متأكد من تأكيد الطلب ؟');">
+    <input type="hidden" name="_token" value="{{ csrf_token('sellerconfirm' ~ order.id) }}">
+    <button class="btn label-success" style="color: white;">تأكيد الطلب</button>
+</form>
+					   
+					   </td>
+            {% endif %}
+{% endif %}
+
+  {% if product.status =="تم الإلغاء" or product.status =="تم التأكيد" %}  {% else %}
+					   <td  class="t-data" style="text-align: center;" colspan="1" class="t-data"> {{ include('orders/_delete_form.html.twig') }}</td>
+            {% endif %}
+
+			
+            
+            </tr>
+			 {% if product.status =="تم الإلغاء" %}  {% else %}
+              {% set total=total + (product.quantity*product.price) %}  {% endif %}
+			       {% else %}
+                <tr>
+                    <td colspan="5"><h4 style="justify-content: center;display: flex;">ليس لديك منتجات بعد</h4></td>
+                </tr>
+
+
+			{% endfor %}
+		
+                <tr class="cross" >   <td colspan="2" class="t-data" style="font-size: 120%; text-align: center;"><span style="font-size: 120%;" class="mycolor"><b>الإجمالي:</b></span> <b>{{total}} ريال سعودي</b></td>
+              
+                </tr>
+
+            
+            
+
+      
+	</table>
+
+
+ 
+
+
+ <table class="table " style="border-bottom: none;border-left: none;" dir="rtl">
+	
+			<tr><th class="t-head head-it ">رقم الطلب</th>
+	<td class="t-data">
+	
+{{ order.id }}
+			 </td>
+            </tr>
+           <tr> <th class="t-head">الإجمالي</th> 
+           	<td class="t-data">
+	
+{{total}} ريال سعودي
+			 </td>
+           </tr>
+			<tr><th class="t-head">اسم الزبون</th> 
+            	<td class="t-data">
+	
+{{ order.name }}
+			 </td>
+            </tr>
+	<tr>	<th class="t-head">العنوان</th> 
+    	<td class="t-data">
+	
+{{ order.address }}
+			 </td>
+    </tr>
+        	<tr><th class="t-head">الحي</th> 
+            	<td class="t-data">
+	{{ order.city }}
+
+			 </td>
+            </tr>
+             <tr>	<th class="t-head">رقم الهاتف</th>
+             	<td class="t-data">
+	{{ order.phone }}
+
+			 </td>
+              </tr>
+
+                           <tr>	<th class="t-head">معلومات التوصيل</th>
+             	<td class="t-data">
+	{{ order.shipinfo }}
+
+			 </td>
+              </tr>
+
+                           {# <tr>	<th class="t-head">أخر تحديث للطلب</th>
+             	<td class="t-data">
+                 {% if order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' == NULL %}
+                 لايوجد
+                 {% else %}
+{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}
+{% endif %}
+			 </td>
+              </tr> #}
+
+                           <tr>	<th class="t-head">تاريخ إنشاء الطلب</th>
+             	<td class="t-data">
+	
+{{ order.created_at ? order.created_at|date('Y-m-d H:i:s') : '' }}
+			 </td>
+              </tr>
+          
+             
+
+
+
+
+
+	</table>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 </div>
+		 </div>
+
+
+{% endblock %}

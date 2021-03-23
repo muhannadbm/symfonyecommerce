@@ -1,0 +1,123 @@
+
+
+<style>
+    body {
+        font-size: 14px;
+        font-family: "Lato",sans-serif;
+    }
+    b, strong {
+        font-weight: bolder;
+    }
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+    *, *::before, *::after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    button {
+        cursor: pointer;
+        outline: none !important;
+        letter-spacing: 0px;
+    }
+    html {
+        font-family: sans-serif;
+        line-height: 1.15;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -ms-overflow-style: scrollbar;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .fade {
+        opacity: 0;
+        transition: opacity .15s linear;
+    }
+    .alert {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+    }
+    .alert-dismissible {
+        padding-right: 4rem;
+    }
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+    .fade.show {
+        opacity: 1;
+    }
+
+
+
+    .close {
+        float: right;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0px 1px 0px #fff;
+        opacity: 0.5;
+    }
+
+
+    .alert-dismissible .close {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: .75rem 1.25rem;
+        color: inherit;
+    }
+
+</style>
+</head>
+
+
+
+
+{% for label,flashes in app.session.flashbag.all  %}
+{% for flash in flashes %}
+{% if (label =='success') %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong><h4>تم بنجاح</h4></strong>
+    <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+        <span class="fa fa-times"></span>
+    </button>
+    {{ flash }}
+</div>
+
+
+
+{% elseif (label =='error') %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>خطأ! </strong>
+        <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+            <span class="fa fa-times"></span>
+        </button>
+
+    {{ flash }}
+    </div>
+
+    {% endif %}
+{% endfor %} {% endfor %}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+
+	<head><style> 
+	.mysearch{  position: relative;
+  display: inline-block;
+  }
+ .autocomplete {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+        border-top-color: rgb(212, 212, 212);
+        border-top-style: solid;
+        border-top-width: 1px;
+        border-bottom-color: rgb(212, 212, 212);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    border-top-color: rgb(212, 212, 212);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-bottom-color: rgb(212, 212, 212);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 102%;
+    left: 0;
+    right: 0;
+    background: white;
+    width: 28%;
+}
+  a:hover, a:focus {
+
+    color: #E74C3C;
+    text-decoration: none;
+
+}
+  .myelement {
+    color: #039445;
+    float: right;
+    margin-right: 4px;
+    margin-bottom: 6px;
+}
+  </style></head>
+
+
+
+<div data-vide-bg="{{ asset('uploads') }}/video/video">
+    <div class="container">
+		<div class="banner-info">
+			<h3>أطلب طلبك الأن و احصل على منتجاتك عند باب بيتك</h3>	
+			<div class="search-form">
+				<form  autocomplete="off" action="#" method="post" style="position: relative;">
+					<input id="search" type="text" placeholder="Search..." name="Search...">
+					  <div class="autocomplete" style="right: 21px;margin-top: -1px;"> </div>
+					<input style="position: absolute;" type="submit" value=" " >
+				</form>
+			</div>		
+		</div>	
+    </div>
+</div>
+
+    <script>window.jQuery || document.write('<script src="{{ asset('uploads') }}/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+    <script src="{{ asset('uploads') }}/js/jquery.vide.min.js"></script>
+
+
+
+
+{# 
+<body>
+  <div class="sidebar-search">
+
+
+
+ <form autocomplete="off" action="/action_page.php">
+      <div class="input-group custom-search-form mysearch">
+          <input type="text" id="search" class="form-control" placeholder="Suche...">
+		   <div class="autocomplete"> </div>
+      </div>
+	 
+	  </form>
+      <!-- /input-group -->
+  </div>
+
+</body>
+</html> #}
+
+
+
+
+
+
+<!-- jQuery is necessary -->
+{# {# <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>  #}
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 1;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $(".autocomplete").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+                                    if (key == 'entities') {
+                                        if (id != 'error') {
+                                            entitySelector.append('<div ><a class="myelement" href="/products/'+id+'">'+value+'</a></div><br>');
+                                        } else {
+                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                        }
+                                    }
+                                });
+                            });
+                        }
+                     }
+                });
+            }
+        });
+    });
+</script> 

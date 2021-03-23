@@ -1,0 +1,49 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}City Edit{% endblock %}
+{% block page %}  <h4 class="page-title pull-left">City Info Edit</h4>{% endblock %}
+{% block path %}  <li><a href=>City Edit </a></li> {% endblock %}
+{% block content %}
+
+
+
+
+
+
+
+
+
+    <div class="card">
+        <div class="card-body">
+
+            {{ include ('admin/messages.html.twig') }}
+            <h4 class="header-title" >Edit Selected City info</h4>
+
+            <div class="col-12 mt-5">
+
+
+                <form method="post"   >
+
+                    <div id="users" class="col-6 mt-5">
+
+
+                            <div class="form-group"><label class=""> <b class="text-muted mb-3 mt-4 d-block">Name:</b></label>
+                                <input  value="{{ city.name }}" type="text"  class="form-control" id="City_title" name="city[name]"  maxlength="40"  >
+                                <button class="btn btn-primary mt-4 pr-4 pl-4" type="submit">Update</button>
+                                          </div> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <a href="{{ path('city_index') }}">back to list</a>
+    <br>
+    <br>
+
+{% endblock %}

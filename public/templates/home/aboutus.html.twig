@@ -1,0 +1,55 @@
+{% extends 'frontbase.html.twig' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block keywords %} {% endblock %}
+{% block description %} {% endblock %}
+
+{% block content %}
+<head >
+    <link rel="icon"
+          type="image/png"
+
+          href="https://cdn4.iconfinder.com/data/icons/natural-green-perfect-pixel-2/512/Leaves_leaf_green_natural-512.png">
+
+<style>
+    
+    .textmid {
+    text-align: center;
+}
+    
+    
+</style>
+      {% if app.request.getLocale() == 'ar'%}
+<div class="features_items" style="font-size: 130%;" ><!--features_items-->
+{% else %}
+<div class="features_items" >
+          {% endif %}
+<br>
+
+      <div class="textmid">
+                             
+                                                 {% if app.request.getLocale() == 'tr'%}   {{ data[0].aboutustr|raw }}
+ 
+ {% elseif app.request.getLocale() == 'ar'%}
+   {{ data[0].aboutusar|raw }}
+ 
+ {% else %}
+ 
+  {{ data[0].aboutus|raw }}
+
+                      {% endif %}
+                        
+     
+  
+
+</div>
+</div>
+</div> 
+
+
+
+
+ {% endblock %}
+
+

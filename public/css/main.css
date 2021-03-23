@@ -1,4 +1,3 @@
-﻿
 /*************************
 *******Typography******
 **************************/
@@ -581,7 +580,8 @@ ul.sub-menu {
 }
 
 .item {
-  padding-left: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 
@@ -630,12 +630,13 @@ ul.sub-menu {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   font-weight: 300;
-  margin-top: 23px;
+  margin: 20 auto;
 }
 
 
 .item button:hover {
-  background: #FE980F;
+  background: #f5f5ed;
+  color: #696763;
 }
 
 .control-carousel {
@@ -846,7 +847,7 @@ h2.title {
 }
 
 .product-image-wrapper{
-	border:1px solid #F7F7F5;
+
 	overflow: hidden;
 	margin-bottom:30px;
 }
@@ -1172,7 +1173,7 @@ h2.title {
 }
 
 .view-product img {
-  border: 1px solid #F7F7F0;
+
   height: 380px;
   width: 100%;
 }
@@ -1215,7 +1216,7 @@ h2.title {
 }
 
 .product-information {
-  border: 1px solid #F7F7F0;
+  
   overflow: hidden;
   padding-bottom: 60px;
   padding-left: 60px;
@@ -1408,14 +1409,15 @@ h2.title {
 }
 
 .content-404  h2 {
-  margin-top:50px;
+  margin-top:0px;
+  margin-bottom: 25px;
 }
 
-.content-404 h2 a {
+.content-404 h4 a {
   background: #FE980F;
   color: #FFFFFF;
   font-family: 'Roboto', sans-serif;
-  font-size: 44px;
+  font-size: 24px;
   font-weight: 300;
   padding: 8px 40px;
 }
@@ -2519,5 +2521,3 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
 }
-
-
